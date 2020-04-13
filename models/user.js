@@ -18,6 +18,10 @@ let userSchema = new Schema({
     match: /^(k|K)([0-9]{6})(@nu\.edu\.pk)$/,
     required: true,
   },
+  image: {
+    type: Buffer,
+    required: true,
+  },
 });
 
 let User = mongoose.model("User", userSchema);
