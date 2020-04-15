@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^4.0.1",
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "express-handlebars": "^4.0.3",
     "http": "0.0.1-security",
