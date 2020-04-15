@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
+const passport = require("passport");
 const { smtpTransport, Mail } = require("../config/emailClient");
 
 module.exports.getHome = (req, res) => {
@@ -35,13 +36,25 @@ module.exports.registerUser = async (req, res) => {
 
     let mail = new Mail(
       email,
-      `Verify your account using: ${verificationHash}`
+      `Verify your account using: <a href="https://localhost:5000/verify/${verificationHash}"></a>`
     );
     await newUser.save();
     await smtpTransport.sendMail(mail);
   } catch (error) {
     console.log(error);
+    res.send({ message: error.message });
   }
 
   res.redirect("/");
+};
+
+module.exports.getLoginPage = (req, res) => {
+  res.render("login");
+};
+
+module.exports.loginUser = (req, res, next) => {
+  passport.authenticate("local", {
+    successRedirect: "/user/dashboard",
+    failureRedirect: "/login",
+  })(req, res, next);
 };
