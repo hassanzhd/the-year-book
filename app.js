@@ -1,17 +1,22 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const ehbs = require("express-handlebars");
+const session = require("express-session");
 const indexRouter = require("./routes/index");
 const userRouter = require("./routes/user");
+const passport = require("passport");
 
+let app = express();
 mongoose.connect("mongodb://localhost:27017/mongotest", {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 });
-
-let app = express();
+require("./config/passport")(passport);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(session({ secret: "secret", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.engine("handlebars", ehbs());
 app.set("view engine", "handlebars");
 
