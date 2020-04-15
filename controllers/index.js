@@ -1,4 +1,6 @@
 const User = require("../models/user");
+const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 const { smtpTransport, Mail } = require("../config/emailClient");
 
 module.exports.getHome = (req, res) => {
@@ -10,12 +12,31 @@ module.exports.getRegisterPage = (req, res) => {
 };
 
 module.exports.registerUser = async (req, res) => {
-  const { username, batch, email, bio } = req.body;
+  let { username, password, batch, email, bio } = req.body;
   const image = [...req.file.buffer];
 
   try {
-    let newUser = new User({ name: username, batch, bio, email, image });
-    let mail = new Mail(email, "<b>HELLO</b>");
+    let salt = await bcrypt.genSalt(10);
+    let hash = await bcrypt.hash(password, salt);
+    password = hash;
+
+    let verificationHash = crypto.randomBytes(20).toString("hex");
+
+    let newUser = new User({
+      username,
+      password,
+      batch,
+      bio,
+      email,
+      image,
+      verificationHash,
+      verified: false,
+    });
+
+    let mail = new Mail(
+      email,
+      `Verify your account using: ${verificationHash}`
+    );
     await newUser.save();
     await smtpTransport.sendMail(mail);
   } catch (error) {

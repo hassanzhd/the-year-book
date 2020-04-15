@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let userSchema = new Schema({
-  name: {
+  username: {
+    type: String,
+    required: true,
+  },
+  password: {
     type: String,
     required: true,
   },
@@ -21,6 +25,12 @@ let userSchema = new Schema({
   image: {
     type: Buffer,
     required: true,
+  },
+  verificationHash: {
+    type: String,
+  },
+  verified: {
+    type: Boolean,
   },
 });
 
