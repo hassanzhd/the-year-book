@@ -1,9 +1,18 @@
-<form action="/login" method="POST">
-    <label for="username">Username:</label>
-    <input type="text" name="username">
-    <br><br>
-    <label for="password">Password:</label>
-    <input type="password" name="password">
-    <br><br>
-    <input type="submit" value="Login">
-</form>
+<div class="container">
+    <div class="loginHeading">
+        <h1>Login to THE YEAR BOOK.</h1>
+    </div>
+    <form class="mg-2 loginForm center" action="/login" method="POST">
+        <div class="mg-2 center">
+            <label class="font-medium" for="username">Username:</label>
+            <input type="text" name="username">
+        </div>
+        <div class=" mg-2 center">
+            <label class="font-medium" for="password">Password:</label>
+            <input type="password" name="password">
+        </div>
+        <div class="mg-2 center">
+            <button>Login</button>
+        </div>
+    </form>
+</div>
