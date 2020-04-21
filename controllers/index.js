@@ -1,7 +1,6 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
-const passport = require("passport");
 const { smtpTransport, Mail } = require("../config/emailClient");
 
 module.exports.getHome = (req, res) => {
@@ -53,8 +52,6 @@ module.exports.getLoginPage = (req, res) => {
 };
 
 module.exports.loginUser = (req, res, next) => {
-  passport.authenticate("local", {
-    successRedirect: "/user/dashboard",
-    failureRedirect: "/login",
-  })(req, res, next);
+  req.user.image = req.user.image.toString("base64");
+  res.render("dashboard", req.user);
 };
