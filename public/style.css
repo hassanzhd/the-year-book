@@ -250,8 +250,9 @@
 }
 
 .dashboardHeader button a {
+  font-family: "Nanum Pen Script";
   color: white;
-  font-size: 1em;
+  font-size: 1.75em;
   text-decoration: none;
   font-weight: bold;
 }
@@ -260,4 +261,47 @@
   opacity: 0.4;
   transition: 0.5s;
   background-color: grey;
+}
+
+.batchContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 2;
+}
+
+.batchButtons * {
+  font-family: "Nanum Pen Script";
+}
+
+.batchButtons button {
+  height: 4em;
+  width: 14em;
+  border: none;
+  background-color: black;
+}
+
+.batchButtons button a {
+  color: white;
+  font-size: 3em;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.batchButtons button:hover {
+  opacity: 0.4;
+  transition: 0.5s;
+  background-color: grey;
+}
+
+.batchHeading h1 {
+  font-family: "Nanum Pen Script";
+  font-weight: bold;
+  font-size: 5em;
+}
+
+.batchHeading h1 a {
+  text-decoration: none;
+  color: black;
 }
