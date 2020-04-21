@@ -52,6 +52,5 @@ module.exports.getLoginPage = (req, res) => {
 };
 
 module.exports.loginUser = (req, res, next) => {
-  req.user.image = req.user.image.toString("base64");
-  res.render("dashboard", req.user);
+  res.redirect("/user/dashboard");
 };
