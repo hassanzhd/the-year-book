@@ -35,11 +35,11 @@
   margin: 1em;
 }
 
-.pad-2 {
+.pad-1 {
   padding: 0.5em;
 }
 
-.pady-2 {
+.pady-1 {
   padding-left: 1em;
   padding-right: 0.5em;
 }
@@ -187,4 +187,77 @@
   color: black;
   font-weight: bold;
   transition: 1s;
+}
+
+.indexHeading h1 {
+  font-family: "Nanum Pen Script";
+  font-weight: bold;
+  font-size: 10em;
+}
+
+.indexHeading h1 a {
+  text-decoration: none;
+  color: black;
+}
+
+.indexHeading h1 a:hover {
+  color: red;
+}
+
+.indexButtons * {
+  font-family: "Nanum Pen Script";
+}
+
+.indexButtons button {
+  width: 100px;
+  height: 35px;
+  background-color: black;
+  border: none;
+}
+
+.indexButtons button:hover {
+  background-color: gray;
+  transition: 1s;
+}
+
+.indexButtons button a {
+  font-size: 2em;
+  text-decoration: none;
+  color: white;
+}
+
+.dashboardHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin-top: 1em;
+}
+
+.dashboardHeader img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.dashboardHeader button {
+  height: 2.5em;
+  width: 7em;
+  border: none;
+  background-color: black;
+}
+
+.dashboardHeader button a {
+  color: white;
+  font-size: 1em;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.dashboardHeader button:hover {
+  opacity: 0.4;
+  transition: 0.5s;
+  background-color: grey;
 }
