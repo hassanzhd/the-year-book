@@ -4,7 +4,6 @@ const ehbs = require("express-handlebars");
 const helpers = require("./helpers/handlebars");
 const session = require("express-session");
 const indexRouter = require("./routes/index");
-const userRouter = require("./routes/user");
 const passport = require("passport");
 
 let app = express();
@@ -28,6 +27,5 @@ app.engine(
 app.set("view engine", "handlebars");
 
 app.use("/", indexRouter);
-app.use("/user", userRouter);
 
 module.exports = app;

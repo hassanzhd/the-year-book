@@ -8,5 +8,5 @@ module.exports.forwardAuthenticated = (req, res, next) => {
   if (!req.isAuthenticated()) {
     return next();
   }
-  res.redirect("/user/dashboard");
+  res.redirect("/dashboard");
 };
