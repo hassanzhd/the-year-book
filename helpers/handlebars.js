@@ -47,7 +47,7 @@ ehbs.registerHelper("batchRender", (image, batch, entries) => {
   return `<div class="container">
   <div class="dashboardHeader">
       <img src="data:image/png;base64,${image}">
-      <h1>Batch: ${batch}</h1>
+      <h1><a id="main" href="/">Home</a> | Batch: ${batch}</h1>
       <button type="submit"><a href="/logout">LOGOUT</a></button>
   </div>
   <div class="bookContent">
