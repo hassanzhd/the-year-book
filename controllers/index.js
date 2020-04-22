@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const { smtpTransport, Mail } = require("../config/emailClient");
@@ -52,5 +53,21 @@ module.exports.getLoginPage = (req, res) => {
 };
 
 module.exports.loginUser = (req, res, next) => {
-  res.redirect("/user/dashboard");
+  res.redirect("/dashboard");
+};
+
+module.exports.getDashboard = async (req, res) => {
+  req.user.image = req.user.image.toString("base64");
+  let connection = mongoose.connection;
+  let batch = await connection.db.collection("batch").find({}).toArray();
+  res.render("dashboard", { image: req.user.image, batch });
+};
+
+module.exports.getBatch = (req, res) => {
+  res.render("batch", { name: req.params.name });
+};
+
+module.exports.logoutUser = (req, res) => {
+  req.logout();
+  res.redirect("/login");
 };
