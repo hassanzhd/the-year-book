@@ -236,6 +236,11 @@
   margin-top: 1em;
 }
 
+.dashboardHeader h1 {
+  font-family: "Shadows Into Light";
+  font-size: 3em;
+}
+
 .dashboardHeader img {
   width: 100px;
   height: 100px;

@@ -64,7 +64,8 @@ module.exports.getDashboard = async (req, res) => {
 };
 
 module.exports.getBatch = (req, res) => {
-  res.render("batch", { name: req.params.name });
+  req.user.image = req.user.image.toString("base64");
+  res.render("batch", { image: req.user.image, batch: req.params.name });
 };
 
 module.exports.logoutUser = (req, res) => {
