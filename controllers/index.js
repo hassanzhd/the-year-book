@@ -4,17 +4,34 @@ const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const { smtpTransport, Mail } = require("../config/emailClient");
 
+let connection = mongoose.connection;
+
 module.exports.getHome = (req, res) => {
   res.render("index");
 };
 
-module.exports.getRegisterPage = (req, res) => {
-  res.render("register");
+module.exports.getRegisterPage = async (req, res) => {
+  let batch = await connection.db.collection("batch").find({}).toArray();
+  res.render("register", { batch });
 };
 
 module.exports.registerUser = async (req, res) => {
   let { username, password, batch, email, bio } = req.body;
+
+  if (!password) {
+    return res.json({ msg: "Password Field is empty" });
+  }
+
   const image = [...req.file.buffer];
+  let check;
+  try {
+    check = await User.findOne({ email });
+    if (check) {
+      throw new Error("User already exists");
+    }
+  } catch (error) {
+    return res.json({ msg: error.message });
+  }
 
   try {
     let salt = await bcrypt.genSalt(10);
@@ -57,14 +74,12 @@ module.exports.loginUser = (req, res, next) => {
 };
 
 module.exports.getDashboard = async (req, res) => {
-  let connection = mongoose.connection;
   let batch = await connection.db.collection("batch").find({}).toArray();
   req.user.image = req.user.image.toString("base64");
   res.render("dashboard", { image: req.user.image, batch });
 };
 
 module.exports.getBatch = async (req, res) => {
-  let connection = mongoose.connection;
   let batch, entries;
   try {
     batch = await connection.db.collection("batch").findOne({
