@@ -22,6 +22,7 @@ Router.post("/register", upload.single("image"), indexController.registerUser);
 
 Router.get("/dashboard", ensureAuthenticated, indexController.getDashboard);
 Router.get("/batch/:name", ensureAuthenticated, indexController.getBatch);
+Router.get("/user/:username", ensureAuthenticated, indexController.getUser);
 Router.get("/logout", indexController.logoutUser);
 
 module.exports = Router;

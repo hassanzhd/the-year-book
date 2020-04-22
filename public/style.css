@@ -236,6 +236,11 @@
   margin-top: 1em;
 }
 
+.dashboardHeader h1 {
+  font-family: "Shadows Into Light";
+  font-size: 3em;
+}
+
 .dashboardHeader img {
   width: 100px;
   height: 100px;
@@ -304,4 +309,91 @@
 .batchHeading h1 a {
   text-decoration: none;
   color: black;
+}
+
+.bookContent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 20px;
+}
+
+.bookEntry {
+  height: 350px;
+  width: 300px;
+}
+
+.bookEntry .imgdiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bookEntry img {
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+}
+
+.bookEntry .name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5em 0em;
+}
+
+.bookEntry .name h1 {
+  font-size: 2em;
+  font-family: "Shadows Into Light";
+}
+
+.userContent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 3em;
+}
+
+.userEntry {
+  display: flex;
+  flex-direction: row;
+  height: 300px;
+  width: 700px;
+  margin: 3em;
+  box-shadow: 5px 10px 8px grey;
+}
+
+.userEntry .imgdiv {
+  display: flex;
+  width: 230px;
+  height: 100%;
+}
+
+.userEntry img {
+  width: 100%;
+}
+
+.userEntry .datadiv {
+  display: flex;
+  flex-direction: column;
+  margin-left: 3em;
+  margin-top: 1em;
+}
+
+.userEntry .datadiv h1 {
+  color: rgb(155, 208, 226);
+  font-size: 2.25em;
+  font-family: "Shadows Into Light";
+}
+
+#main {
+  text-decoration: none;
+  color: black;
+}
+
+#main:hover {
+  color: red;
 }

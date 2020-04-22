@@ -36,7 +36,7 @@ module.exports.registerUser = async (req, res) => {
 
     let mail = new Mail(
       email,
-      `Verify your account using: <a href="https://localhost:5000/verify/${verificationHash}"></a>`
+      `Verify your account using: <a href="https://localhost:5000/verify/${verificationHash}">click here</a>`
     );
     await newUser.save();
     await smtpTransport.sendMail(mail);
@@ -57,14 +57,44 @@ module.exports.loginUser = (req, res, next) => {
 };
 
 module.exports.getDashboard = async (req, res) => {
-  req.user.image = req.user.image.toString("base64");
   let connection = mongoose.connection;
   let batch = await connection.db.collection("batch").find({}).toArray();
+  req.user.image = req.user.image.toString("base64");
   res.render("dashboard", { image: req.user.image, batch });
 };
 
-module.exports.getBatch = (req, res) => {
-  res.render("batch", { name: req.params.name });
+module.exports.getBatch = async (req, res) => {
+  let connection = mongoose.connection;
+  let batch, entries;
+  try {
+    batch = await connection.db.collection("batch").findOne({
+      name: parseFloat(req.params.name),
+    });
+    if (!batch) {
+      throw new Error("BATCH NOT FOUND");
+    }
+  } catch (error) {
+    return res.json({ msg: error.message });
+  }
+
+  if (batch) {
+    try {
+      entries = await User.find({ batch: batch.name });
+    } catch (error) {}
+  }
+  req.user.image = req.user.image.toString("base64");
+  res.render("batch", {
+    image: req.user.image,
+    batch: req.params.name,
+    entries,
+  });
+};
+
+module.exports.getUser = async (req, res) => {
+  let { username } = req.params;
+  let user = await User.findOne({ username });
+  user.image = user.image.toString("base64");
+  res.render("user", user);
 };
 
 module.exports.logoutUser = (req, res) => {
