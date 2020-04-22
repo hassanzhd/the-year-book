@@ -53,7 +53,7 @@ module.exports.registerUser = async (req, res) => {
 
     let mail = new Mail(
       email,
-      `Verify your account using: <a href="https://localhost:5000/verify/${verificationHash}">click here</a>`
+      `Verify your account using: <a href="http://localhost:5000/verify/${verificationHash}">click here</a>`
     );
     await newUser.save();
     await smtpTransport.sendMail(mail);
@@ -70,6 +70,18 @@ module.exports.getLoginPage = (req, res) => {
 };
 
 module.exports.loginUser = (req, res, next) => {
+  res.redirect("/dashboard");
+};
+
+module.exports.verifyUser = async (req, res) => {
+  let hash = req.params.hash;
+  let user = await User.findOne({ verificationHash: hash });
+  if (user) {
+    user.verified = true;
+    user.save();
+  } else {
+    res.json({ msg: "error" });
+  }
   res.redirect("/dashboard");
 };
 
