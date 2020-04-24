@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const ehbs = require("express-handlebars");
-const helpers = require("./helpers/handlebars");
 const middleware = require("./middleware");
 const session = require("express-session");
 const indexRouter = require("./routes/index");
@@ -21,12 +20,7 @@ app.use(session({ secret: "secret", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static("public"));
-app.engine(
-  "handlebars",
-  ehbs({
-    helpers,
-  })
-);
+app.engine("handlebars", ehbs());
 app.set("view engine", "handlebars");
 
 app.use("/", indexRouter);
