@@ -6,11 +6,13 @@ const middleware = require("./middleware");
 const session = require("express-session");
 const indexRouter = require("./routes/index");
 const passport = require("passport");
+require("dotenv").config();
 
 let app = express();
-mongoose.connect("mongodb://localhost:27017/mongotest", {
+mongoose.connect(process.env.DATABASE_URL, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
+  dbName: "the_year_book",
 });
 require("./config/passport")(passport);
 app.use(express.json());

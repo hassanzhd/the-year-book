@@ -30,7 +30,7 @@ module.exports.registerUser = async (req, res, next) => {
       throw new Error("User already exists with provided email");
     }
   } catch (error) {
-    next(error);
+    return next(error);
   }
 
   try {
@@ -58,7 +58,7 @@ module.exports.registerUser = async (req, res, next) => {
     await newUser.save();
     await smtpTransport.sendMail(mail);
   } catch (error) {
-    next(error);
+    return next(error);
   }
 
   res.redirect("/");
