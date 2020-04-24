@@ -360,6 +360,7 @@
   width: 230px;
   height: 230px;
   border-radius: 50%;
+  box-shadow: 5px 10px 8px grey;
 }
 
 .bookEntry .name {
