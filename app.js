@@ -1,9 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const ehbs = require("express-handlebars");
-const helpers = require("./helpers/handlebars");
 const middleware = require("./middleware");
 const session = require("express-session");
+const helper = require("./helpers/handlebars");
 const indexRouter = require("./routes/index");
 const passport = require("passport");
 require("dotenv").config();
@@ -24,7 +24,7 @@ app.use(express.static("public"));
 app.engine(
   "handlebars",
   ehbs({
-    helpers,
+    helpers: helper,
   })
 );
 app.set("view engine", "handlebars");
