@@ -15,11 +15,11 @@ module.exports.getRegisterPage = async (req, res) => {
   res.render("register", { batch });
 };
 
-module.exports.registerUser = async (req, res) => {
+module.exports.registerUser = async (req, res, next) => {
   let { username, password, batch, email, bio } = req.body;
 
   if (!password) {
-    return res.json({ msg: "Password Field is empty" });
+    next(new Error("Password Field is empty"));
   }
 
   const image = [...req.file.buffer];
@@ -27,10 +27,10 @@ module.exports.registerUser = async (req, res) => {
   try {
     check = await User.findOne({ email });
     if (check) {
-      throw new Error("User already exists");
+      throw new Error("User already exists with provided email");
     }
   } catch (error) {
-    return res.json({ msg: error.message });
+    next(error);
   }
 
   try {
@@ -58,8 +58,7 @@ module.exports.registerUser = async (req, res) => {
     await newUser.save();
     await smtpTransport.sendMail(mail);
   } catch (error) {
-    console.log(error);
-    res.send({ message: error.message });
+    next(error);
   }
 
   res.redirect("/");
@@ -73,14 +72,15 @@ module.exports.loginUser = (req, res, next) => {
   res.redirect("/dashboard");
 };
 
-module.exports.verifyUser = async (req, res) => {
+module.exports.verifyUser = async (req, res, next) => {
   let hash = req.params.hash;
   let user = await User.findOne({ verificationHash: hash });
   if (user) {
     user.verified = true;
     user.save();
   } else {
-    res.json({ msg: "error" });
+    let error = new Error();
+    return next(error);
   }
   res.redirect("/dashboard");
 };
@@ -91,23 +91,25 @@ module.exports.getDashboard = async (req, res) => {
   res.render("dashboard", { image: req.user.image, batch });
 };
 
-module.exports.getBatch = async (req, res) => {
+module.exports.getBatch = async (req, res, next) => {
   let batch, entries;
   try {
     batch = await connection.db.collection("batch").findOne({
       name: parseFloat(req.params.name),
     });
     if (!batch) {
-      throw new Error("BATCH NOT FOUND");
+      throw new Error("Batch not found. You will be redirected.");
     }
   } catch (error) {
-    return res.json({ msg: error.message });
+    return next(error);
   }
 
   if (batch) {
     try {
       entries = await User.find({ batch: batch.name });
-    } catch (error) {}
+    } catch (error) {
+      return next(error);
+    }
   }
   req.user.image = req.user.image.toString("base64");
   res.render("batch", {

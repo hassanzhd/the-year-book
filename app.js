@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const ehbs = require("express-handlebars");
 const helpers = require("./helpers/handlebars");
+const middleware = require("./middleware");
 const session = require("express-session");
 const indexRouter = require("./routes/index");
 const passport = require("passport");
@@ -27,5 +28,7 @@ app.engine(
 app.set("view engine", "handlebars");
 
 app.use("/", indexRouter);
+app.use(middleware.notFound);
+app.use(middleware.onError);
 
 module.exports = app;
