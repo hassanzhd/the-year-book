@@ -12,7 +12,7 @@ ehbs.registerHelper("dashboard", (image, batch) => {
   <div class="container">
     <div class="dashboardHeader">
         <img src="data:image/png;base64,${image}">
-        <h1>Home</h1>
+        <h1>Home | <a id="main" href="/settings"> Settings</a></h1>
         <button type="submit"><a href="/logout">LOGOUT</a></button>
     </div>
 
@@ -47,7 +47,7 @@ ehbs.registerHelper("batchRender", (image, batch, entries) => {
   return `<div class="container">
   <div class="dashboardHeader">
       <img src="data:image/png;base64,${image}">
-      <h1><a id="main" href="/">Home</a> | Batch: ${batch}</h1>
+      <h1><a id="main" href="/">Home</a> | Batch: ${batch} | <a id="main" href="/settings"> Settings</a></h1>
       <button type="submit"><a href="/logout">LOGOUT</a></button>
   </div>
   <div class="bookContent">
@@ -65,7 +65,7 @@ ehbs.registerHelper("registerRender", (batch) => {
 
   return `<div class="container">
   <div class="registerHeading">
-      <h1>REgister at <a href="/">THE YEAR BOOK.</a></h1>
+      <h1>Register at <a href="/">THE YEAR BOOK.</a></h1>
   </div>
   <div class="mg-1 center">
       <form class="mg-1 registerForm" action="/register" enctype="multipart/form-data" method="POST">

@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const ehbs = require("express-handlebars");
 const middleware = require("./middleware");
 const session = require("express-session");
+const helper = require("./helpers/handlebars");
 const indexRouter = require("./routes/index");
 const passport = require("passport");
 require("dotenv").config();
@@ -20,7 +21,12 @@ app.use(session({ secret: "secret", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static("public"));
-app.engine("handlebars", ehbs());
+app.engine(
+  "handlebars",
+  ehbs({
+    helpers: helper,
+  })
+);
 app.set("view engine", "handlebars");
 
 app.use("/", indexRouter);

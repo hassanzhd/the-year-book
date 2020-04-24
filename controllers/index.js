@@ -123,7 +123,20 @@ module.exports.getUser = async (req, res) => {
   let { username } = req.params;
   let user = await User.findOne({ username });
   user.image = user.image.toString("base64");
-  res.render("user", user);
+  req.user.image = req.user.image.toString("base64");
+  res.render("user", {
+    username: user.username,
+    bio: user.bio,
+    batch: user.batch,
+    email: user.email,
+    image: user.image,
+    profileImage: req.user.image,
+  });
+};
+
+module.exports.getSettingPage = (req, res) => {
+  req.user.image = req.user.image.toString("base64");
+  res.render("settings", { image: req.user.image });
 };
 
 module.exports.logoutUser = (req, res) => {

@@ -39,6 +39,7 @@ Router.get(
   isVerified,
   indexController.getUser
 );
+Router.get("/settings", ensureAuthenticated, indexController.getSettingPage);
 Router.get("/logout", indexController.logoutUser);
 
 module.exports = Router;
