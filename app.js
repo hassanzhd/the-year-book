@@ -6,6 +6,7 @@ const session = require("express-session");
 const helper = require("./helpers/handlebars");
 const indexRouter = require("./routes/index");
 const passport = require("passport");
+const methodOverride = require("method-override");
 require("dotenv").config();
 
 let app = express();
@@ -28,6 +29,7 @@ app.engine(
   })
 );
 app.set("view engine", "handlebars");
+app.use(methodOverride("_method"));
 
 app.use("/", indexRouter);
 app.use(middleware.notFound);
