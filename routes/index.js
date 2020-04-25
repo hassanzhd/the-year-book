@@ -41,7 +41,7 @@ Router.get(
 );
 Router.get("/settings", ensureAuthenticated, indexController.getSettingPage);
 Router.get("/delete", ensureAuthenticated, indexController.getDeletePage);
-Router.delete("/delete", ensureAuthenticated, indexController.deleteAccount;
+Router.delete("/delete", ensureAuthenticated, indexController.deleteAccount);
 Router.get("/logout", indexController.logoutUser);
 
 module.exports = Router;
