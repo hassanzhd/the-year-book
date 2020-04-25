@@ -135,8 +135,17 @@ module.exports.getUser = async (req, res) => {
 };
 
 module.exports.getSettingPage = (req, res) => {
-  req.user.image = req.user.image.toString("base64");
-  res.render("settings", { image: req.user.image });
+  res.render("settings", { image: req.user.image.toString("base64") });
+};
+
+module.exports.getDeletePage = (req, res) => {
+  res.render("delete", {
+    image: req.user.image.toString("base64"),
+  });
+};
+
+module.exports.deleteAccount = (req, res) => {
+  res.redirect("/");
 };
 
 module.exports.logoutUser = (req, res) => {
