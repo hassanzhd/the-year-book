@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="dashboardHeader">
+        <img src="data:image/png;base64,{{image}}">
+        <h1><a id="main" href="/">Home</a> | Delete Account</h1>
+        <button type="submit"><a href="/logout">LOGOUT</a></button>
+    </div>
+    <div class="deleteContent">
+        <form class="mg-1 deleteForm" action="/delete?_method=DELETE" method="POST">
+            <div class=" mg-1 center">
+                <label class="font-medium" for="password">Confirm Password:</label>
+                <input type="password" name="password">
+            </div>
+            <div class="mg-2 center">
+                <button>Delete Account</button>
+            </div>
+        </form>
+
+    </div>
+</div>
