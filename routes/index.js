@@ -34,7 +34,7 @@ Router.get(
   indexController.getBatch
 );
 Router.get(
-  "/user/:username",
+  "/user/:id",
   ensureAuthenticated,
   isVerified,
   indexController.getUser
