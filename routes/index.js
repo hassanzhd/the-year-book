@@ -39,13 +39,51 @@ Router.get(
   isVerified,
   indexController.getUser
 );
-Router.get("/settings", ensureAuthenticated, indexController.getSettingPage);
-Router.get("/delete", ensureAuthenticated, indexController.getDeletePage);
+Router.get(
+  "/settings",
+  ensureAuthenticated,
+  isVerified,
+  indexController.getSettingPage
+);
+Router.get(
+  "/delete",
+  ensureAuthenticated,
+  isVerified,
+  indexController.getDeletePage
+);
 Router.delete(
   "/delete/:id",
   ensureAuthenticated,
+  isVerified,
   indexController.deleteAccount
 );
+Router.get("/update", ensureAuthenticated, indexController.getUpdatePage);
+Router.get(
+  "/changePassword",
+  ensureAuthenticated,
+  isVerified,
+  indexController.getChangePasswordPage
+);
+Router.put(
+  "/changePassword/:id",
+  ensureAuthenticated,
+  isVerified,
+  indexController.changePassword
+);
+Router.get(
+  "/updateInfo",
+  ensureAuthenticated,
+  isVerified,
+  indexController.getUpdateUserPage
+);
+Router.put(
+  "/updateInfo/:id",
+  ensureAuthenticated,
+  isVerified,
+  upload.single("image"),
+  indexController.updateUser
+);
+
 Router.get("/logout", indexController.logoutUser);
 
 module.exports = Router;

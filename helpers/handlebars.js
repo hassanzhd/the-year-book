@@ -102,3 +102,49 @@ ehbs.registerHelper("registerRender", (batch) => {
   </div>
 </div>`;
 });
+
+ehbs.registerHelper("updateInfoRender", (user, image, batch) => {
+  let optionElement = "";
+  batch.forEach((data) => {
+    if (data.name.toString() === user.batch) {
+      optionElement += `<option value="${data.name}" selected>${data.name}</option>
+    `;
+    } else {
+      optionElement += `<option value="${data.name}">${data.name}</option>
+      `;
+    }
+  });
+
+  return `<div class="container">
+    <div class="dashboardHeader">
+        <img src="data:image/png;base64,${image}">
+        <h1> <a id="main" href="/"> Home</a> | Update info</h1>
+        <button type="submit"><a href="/logout">LOGOUT</a></button>
+    </div>
+    <div class="mg-1 center">
+        <form class="mg-1 registerForm" action="/updateInfo/${user.id}?_method=PUT" enctype="multipart/form-data" method="POST">
+            <div class="mg-1 center">
+                <label class="font-medium" for="username">Name:</label>
+                <input class="bottom-border" type="text" name="username" value="${user.username}">
+            </div>
+            <div class="mg-1 center">
+                <label class="font-medium" for="batch">Batch:</label>
+                <select name="batch">
+                  ${optionElement}
+                </select>
+                </div>
+            <div class="mg-1 center">
+                <label class="font-medium" for="bio">A short bio :</label>
+                <input class="bottom-border" type="text" name="bio" value="${user.bio}">
+            </div>
+            <div class="mg-1 center">
+                <label class="font-medium" for="bio">Select your year book image:</label>
+                <input class="pad-1 font-medium" type="file" name="image">
+            </div>
+            <div class="mg-1 center">
+                <button>Update</button>
+            </div>
+        </form>
+    </div>
+  </div>`;
+});
