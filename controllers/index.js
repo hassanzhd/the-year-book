@@ -140,12 +140,29 @@ module.exports.getSettingPage = (req, res) => {
 
 module.exports.getDeletePage = (req, res) => {
   res.render("delete", {
+    id: req.user.id,
     image: req.user.image.toString("base64"),
   });
 };
 
-module.exports.deleteAccount = (req, res) => {
-  res.redirect("/");
+module.exports.deleteAccount = async (req, res, next) => {
+  let id = req.params.id;
+  let password = req.body.password;
+
+  try {
+    let user = await User.findById(id);
+    let flag = await bcrypt.compare(password, user.password);
+    if (flag) {
+      await user.remove();
+      req.logout();
+    } else {
+      throw new Error("Invalid password");
+    }
+  } catch (error) {
+    return next(error);
+  }
+
+  res.render("msg", { msg: "Thank you for using The Year Book." });
 };
 
 module.exports.logoutUser = (req, res) => {

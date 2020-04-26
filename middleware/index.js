@@ -10,9 +10,9 @@ module.exports.onError = (error, req, res, next) => {
   } else {
     console.log(error);
     if (error.message) {
-      return res.render("error", { msg: error.message });
+      return res.render("msg", { msg: error.message });
     } else {
-      return res.render("error", {
+      return res.render("msg", {
         msg:
           "Some error occured while processing your request. Sorry for inconvenience",
       });
