@@ -2,6 +2,8 @@ const User = require("../models/user");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
+const path = require("path");
+const { validExt } = require("../config/util");
 const { smtpTransport, Mail } = require("../config/emailClient");
 
 let connection = mongoose.connection;
@@ -11,15 +13,21 @@ module.exports.getHome = (req, res) => {
 };
 
 module.exports.getRegisterPage = async (req, res) => {
-  let batch = await connection.db.collection("batch").find({}).toArray();
-  res.render("register", { batch });
+  try {
+    let batch = await connection.db.collection("batch").find({}).toArray();
+    return res.render("register", { batch });
+  } catch (error) {
+    return next(error);
+  }
 };
 
 module.exports.registerUser = async (req, res, next) => {
   let { username, password, batch, email, bio } = req.body;
 
   if (!password) {
-    next(new Error("Password Field is empty"));
+    return next(new Error("Password Field is empty"));
+  } else if (!validExt(req.file.originalname)) {
+    return next(new Error("Invalid file extension"));
   }
 
   const image = [...req.file.buffer];
@@ -173,6 +181,98 @@ module.exports.deleteAccount = async (req, res, next) => {
   }
 
   res.render("msg", { msg: "Thank you for using The Year Book." });
+};
+
+module.exports.getUpdatePage = async (req, res, next) => {
+  res.render("update", {
+    image: req.user.image.toString("base64"),
+  });
+};
+
+module.exports.getChangePasswordPage = async (req, res, next) => {
+  res.render("changePassword", {
+    id: req.user.id,
+    image: req.user.image.toString("base64"),
+  });
+};
+
+module.exports.changePassword = async (req, res, next) => {
+  let { oldPassword, newPassword } = req.body;
+  let id = req.params.id,
+    user,
+    flag;
+
+  if (!oldPassword || !newPassword) {
+    return next(new Error("Fields are empty"));
+  }
+
+  try {
+    user = await User.findById(id);
+    flag = await bcrypt.compare(oldPassword, user.password);
+  } catch (error) {
+    return next(error);
+  }
+
+  if (flag) {
+    try {
+      let salt = await bcrypt.genSalt(10);
+      let hash = await bcrypt.hash(newPassword, salt);
+      newPassword = hash;
+      user.password = newPassword;
+      user.save();
+      return res.render("msg", { msg: "Password changed successfully." });
+    } catch (error) {
+      return next(error);
+    }
+  } else {
+    return next(new Error("Password is invalid"));
+  }
+};
+
+module.exports.getUpdateUserPage = async (req, res, next) => {
+  try {
+    let batch = await connection.db.collection("batch").find({}).toArray();
+    return res.render("updateUser", {
+      user: req.user,
+      image: req.user.image.toString("base64"),
+      batch,
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+module.exports.updateUser = async (req, res, next) => {
+  let { username, batch, bio } = req.body;
+  let id = req.params.id;
+  let user;
+  try {
+    user = await User.findById(id);
+    if (!user) {
+      throw new Error("User not found.");
+    }
+  } catch (error) {
+    return next(error);
+  }
+
+  user.username = username;
+  user.batch = batch;
+  user.bio = bio;
+
+  try {
+    if (!req.file) {
+      user.save();
+    } else if (validExt(path.extname(req.file.originalname))) {
+      let image = [...req.file.buffer];
+      user.image = image;
+      await user.save();
+      return res.render("msg", { msg: "Information succcessfully updated" });
+    } else {
+      throw new Error("Invalid file extension.");
+    }
+  } catch (error) {
+    return next(error);
+  }
 };
 
 module.exports.logoutUser = (req, res) => {
