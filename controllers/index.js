@@ -78,11 +78,13 @@ module.exports.verifyUser = async (req, res, next) => {
   if (user) {
     user.verified = true;
     user.save();
+    return res.render("msg", {
+      msg: "Account succesfully verified. You will be redirected",
+    });
   } else {
     let error = new Error();
     return next(error);
   }
-  res.redirect("/dashboard");
 };
 
 module.exports.getDashboard = async (req, res) => {
@@ -119,19 +121,27 @@ module.exports.getBatch = async (req, res, next) => {
   });
 };
 
-module.exports.getUser = async (req, res) => {
-  let { username } = req.params;
-  let user = await User.findOne({ username });
-  user.image = user.image.toString("base64");
-  req.user.image = req.user.image.toString("base64");
-  res.render("user", {
-    username: user.username,
-    bio: user.bio,
-    batch: user.batch,
-    email: user.email,
-    image: user.image,
-    profileImage: req.user.image,
-  });
+module.exports.getUser = async (req, res, next) => {
+  let { id } = req.params;
+
+  try {
+    let user = await User.findById(id);
+    if (user) {
+      user.image = user.image.toString("base64");
+      req.user.image = req.user.image.toString("base64");
+      res.render("user", {
+        username: user.username,
+        bio: user.bio,
+        batch: user.batch,
+        email: user.email,
+        image: user.image,
+        profileImage: req.user.image,
+      });
+    }
+  } catch (error) {
+    error.message = "User not found";
+    return next(error);
+  }
 };
 
 module.exports.getSettingPage = (req, res) => {

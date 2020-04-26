@@ -34,7 +34,7 @@ ehbs.registerHelper("batchRender", (image, batch, entries) => {
     let image = data.image.toString("base64");
     entryElement += `<div class="bookEntry">
     <div class="imgdiv">
-        <a href="/user/${data.username}">
+        <a href="/user/${data.id}">
         <img src="data:image/png;base64,${image}">
         </a>
     </div>
