@@ -122,7 +122,7 @@ ehbs.registerHelper("updateInfoRender", (user, image, batch) => {
         <button type="submit"><a href="/logout">LOGOUT</a></button>
     </div>
     <div class="mg-1 center">
-        <form class="mg-1 registerForm" action="/updateInfo/${user.id}?_method=PUT" enctype="multipart/form-data" method="POST">
+        <form class="mg-1 updateForm" action="/updateInfo/${user.id}?_method=PUT" enctype="multipart/form-data" method="POST">
             <div class="mg-1 center">
                 <label class="font-medium" for="username">Name:</label>
                 <input class="bottom-border" type="text" name="username" value="${user.username}">
