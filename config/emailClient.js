@@ -4,8 +4,8 @@ const OAuth2 = google.auth.OAuth2;
 const util = require("./globals");
 
 let oauth2Client = new OAuth2(
-  util.clientid,
-  util.clientSecret,
+  process.env.EMAIL_CLIENT_ID,
+  process.env.EMAIL_CLIENT_SECRET,
   "https://developers.google.com/oauthplayground"
 );
 
@@ -23,7 +23,7 @@ class mail {
   async send(__mail) {
     try {
       oauth2Client.setCredentials({
-        refresh_token: util.refreshToken,
+        refresh_token: process.env.EMAIL_REFRESH_TOKEN,
       });
       let accessToken = await oauth2Client.getAccessToken();
       let smtpTransport = nodemailer.createTransport({
@@ -31,9 +31,9 @@ class mail {
         auth: {
           type: "OAuth2",
           user: "mails.yearbook@gmail.com",
-          clientId: util.clientId,
-          clientSecret: util.clientSecret,
-          refreshToken: util.refreshToken,
+          clientId: process.env.EMAIL_CLIENT_ID,
+          clientSecret: process.env.EMAIL_CLIENT_SECRET,
+          refreshToken: process.env.EMAIL_REFRESH_TOKEN,
           accessToken: accessToken.token,
         },
       });
