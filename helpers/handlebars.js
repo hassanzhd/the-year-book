@@ -88,7 +88,7 @@ ehbs.registerHelper("registerRender", (batch) => {
               <input class="bottom-border" type="text" name="email">
           </div>
           <div class="mg-1 center">
-              <label class="font-medium" for="bio">A short bio :</label>
+              <label class="font-medium" for="bio">A short message :</label>
               <input class="bottom-border" type="text" name="bio">
           </div>
           <div class="mg-1 center">
