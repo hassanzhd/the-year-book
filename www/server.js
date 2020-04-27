@@ -1,7 +1,13 @@
 const http = require("http");
 const app = require("../app");
 
-let PORT = process.env.PORT | 5000;
+let PORT;
+if (process.env.NODE_ENV === "development") {
+  PORT = 5000;
+} else {
+  PORT = process.env.PORT;
+}
+
 let server = http.createServer(app);
 
 server.listen(PORT, () => {
