@@ -63,7 +63,7 @@ module.exports.registerUser = async (req, res, next) => {
 
     let mail = new Mail(
       email,
-      `Verify your account using: <a href="http://localhost:5000/verify/${verificationHash}">click here</a>`
+      `Verify your account using: <a href="https://the-year-book.herokuapp.com/verify/${verificationHash}">click here</a>`
     );
     await newUser.save();
     await mail.send();
