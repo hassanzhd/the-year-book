@@ -12,7 +12,7 @@ module.exports.getHome = (req, res) => {
   res.render("index");
 };
 
-module.exports.getRegisterPage = async (req, res) => {
+module.exports.getRegisterPage = async (req, res, next) => {
   try {
     let batch = await connection.db.collection("batch").find({}).toArray();
     return res.render("register", { batch });
@@ -26,7 +26,9 @@ module.exports.registerUser = async (req, res, next) => {
 
   if (!password) {
     return next(new Error("Password Field is empty"));
-  } else if (!validExt(req.file.originalname)) {
+  } else if (!req.file) {
+    return next(new Error("Picture not added"));
+  } else if (!validExt(path.extname(req.file.originalname))) {
     return next(new Error("Invalid file extension"));
   }
 
@@ -64,7 +66,7 @@ module.exports.registerUser = async (req, res, next) => {
       `Verify your account using: <a href="http://localhost:5000/verify/${verificationHash}">click here</a>`
     );
     await newUser.save();
-    await smtpTransport.sendMail(mail);
+    await mail.send();
   } catch (error) {
     return next(error);
   }

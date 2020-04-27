@@ -1,24 +1,48 @@
 const nodemailer = require("nodemailer");
+const { google } = require("googleapis");
+const OAuth2 = google.auth.OAuth2;
 const util = require("./globals");
+
+let oauth2Client = new OAuth2(
+  util.clientid,
+  util.clientSecret,
+  "https://developers.google.com/oauthplayground"
+);
+
 class mail {
   constructor(__to, __html) {
-    this.from = "mails.yearbook@gmail.com";
-    this.to = __to;
-    this.subject = "Verification email from The Year Book";
-    this.generateTextFromHTML = true;
-    this.html = __html;
+    this.mailObj = {
+      from: "mails.yearbook@gmail.com",
+      to: __to,
+      subject: "Verification email from The Year Book",
+      generateTextFromHTML: true,
+      html: __html,
+    };
+  }
+
+  async send(__mail) {
+    try {
+      oauth2Client.setCredentials({
+        refresh_token: util.refreshToken,
+      });
+      let accessToken = await oauth2Client.getAccessToken();
+      let smtpTransport = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          type: "OAuth2",
+          user: "mails.yearbook@gmail.com",
+          clientId: util.clientId,
+          clientSecret: util.clientSecret,
+          refreshToken: util.refreshToken,
+          accessToken: accessToken.token,
+        },
+      });
+
+      await smtpTransport.sendMail(this.mailObj);
+    } catch (error) {
+      throw error;
+    }
   }
 }
-
-module.exports.smtpTransport = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    type: "OAuth2",
-    user: "mails.yearbook@gmail.com",
-    clientId: util.clientId,
-    clientSecret: util.clientSecret,
-    refreshToken: util.refreshToken,
-  },
-});
 
 module.exports.Mail = mail;
