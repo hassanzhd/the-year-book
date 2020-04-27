@@ -84,7 +84,7 @@ ehbs.registerHelper("registerRender", (batch) => {
               </select>
               </div>
           <div class="mg-1 center">
-              <label class="font-medium" for="email">Email: (nu email-id)</label>
+              <label class="font-medium" for="email">Your NU-mail: </label>
               <input class="bottom-border" type="text" name="email">
           </div>
           <div class="mg-1 center">
