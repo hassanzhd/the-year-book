@@ -2,7 +2,7 @@
   "name": "the-year-book",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "www/server.js",
   "scripts": {
     "dev": "nodemon www/server.js"
   },
