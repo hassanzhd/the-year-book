@@ -263,7 +263,8 @@ module.exports.updateUser = async (req, res, next) => {
 
   try {
     if (!req.file) {
-      user.save();
+      await user.save();
+      return res.render("msg", { msg: "Information succcessfully updated" });
     } else if (validExt(path.extname(req.file.originalname))) {
       let image = [...req.file.buffer];
       user.image = image;

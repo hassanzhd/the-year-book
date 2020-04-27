@@ -91,10 +91,6 @@
   height: 2em;
   width: 20em;
   font-size: 1em;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 2px solid black;
 }
 
 .loginForm button {
@@ -232,7 +228,7 @@
   color: white;
 }
 
-.dashboardHeader {
+.mainHeader {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -242,25 +238,25 @@
   margin-top: 1em;
 }
 
-.dashboardHeader h1 {
+.mainHeader h1 {
   font-family: "Shadows Into Light";
   font-size: 3em;
 }
 
-.dashboardHeader img {
+.mainHeader img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
 }
 
-.dashboardHeader button {
+.mainHeader button {
   height: 2.5em;
   width: 7em;
   border: none;
   background-color: black;
 }
 
-.dashboardHeader button a {
+.mainHeader button a {
   font-family: "Nanum Pen Script";
   color: white;
   font-size: 1.75em;
@@ -268,33 +264,33 @@
   font-weight: bold;
 }
 
-.dashboardHeader button:hover {
+.mainHeader button:hover {
   opacity: 0.4;
   transition: 0.5s;
   background-color: grey;
 }
 
-.unverifiedHeading h1 {
+.message h1 {
   font-family: "Nanum Pen Script";
   font-size: 5em;
   font-weight: bold;
 }
 
-.unverifiedHeading h1 a {
+.message h1 a {
   color: black;
   text-decoration: none;
 }
 
-.unverifiedHeading h1 a:hover {
+.message h1 a:hover {
   color: red;
 }
 
-.unverifiedHeading p {
+.message p {
   font-family: "Arial";
   font-size: 2em;
 }
 
-.batchContent {
+.mainContent {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -302,37 +298,37 @@
   flex: 2;
 }
 
-.batchButtons * {
+.mainContentButtons * {
   font-family: "Nanum Pen Script";
 }
 
-.batchButtons button {
+.mainContentButtons button {
   height: 4em;
   width: 14em;
   border: none;
   background-color: black;
 }
 
-.batchButtons button a {
+.mainContentButtons button a {
   color: white;
   font-size: 3em;
   text-decoration: none;
   font-weight: bold;
 }
 
-.batchButtons button:hover {
+.mainContentButtons button:hover {
   opacity: 0.4;
   transition: 0.5s;
   background-color: grey;
 }
 
-.batchHeading h1 {
+.mainHeading h1 {
   font-family: "Nanum Pen Script";
   font-weight: bold;
   font-size: 5em;
 }
 
-.batchHeading h1 a {
+.mainHeading h1 a {
   text-decoration: none;
   color: black;
 }
@@ -411,7 +407,7 @@
 }
 
 .userEntry .datadiv h1 {
-  color: rgb(155, 208, 226);
+  color: black;
   font-size: 2.25em;
   font-family: "Shadows Into Light";
 }
@@ -424,28 +420,24 @@
   flex: 2;
 }
 
-.deleteForm {
+.updateForm {
   width: 300px;
   height: 250px;
 }
 
-.deleteForm * {
+.updateForm * {
   font-family: "Nanum Pen Script";
 }
 
-.deleteForm input {
+.updateForm input {
   font-family: "QuickSand";
   margin: 0.25em;
   height: 2em;
   width: 20em;
   font-size: 1em;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 2px solid black;
 }
 
-.deleteForm button {
+.updateForm button {
   width: 150px;
   height: 30px;
   font-size: 1.5em;
@@ -455,20 +447,12 @@
   font-weight: normal;
 }
 
-.deleteForm button:hover {
+.updateForm button:hover {
   background-color: gray;
   color: black;
   font-weight: bold;
   transition: 1s;
   cursor: pointer;
-}
-
-.updateContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex: 2;
 }
 
 .updateButtons * {
