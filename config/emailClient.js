@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
-const util = require("./globals");
+require("dotenv").config();
 
 let oauth2Client = new OAuth2(
   process.env.EMAIL_CLIENT_ID,

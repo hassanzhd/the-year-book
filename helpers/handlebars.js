@@ -10,17 +10,17 @@ ehbs.registerHelper("dashboard", (image, batch) => {
 
   return `
   <div class="container">
-    <div class="dashboardHeader">
+    <div class="mainHeader">
         <img src="data:image/png;base64,${image}">
         <h1>Home | <a id="main" href="/settings"> Settings</a></h1>
         <button type="submit"><a href="/logout">LOGOUT</a></button>
     </div>
 
-    <div class="batchContent">
-        <div class="batchHeading">
+    <div class="mainContent">
+        <div class="mainHeading">
             <h1><a href="/">Select year book to view:</a></h1>
         </div>
-        <div class="batchButtons">
+        <div class="mainContentButtons">
             ${batchElement}
         </div>
     </div>
@@ -45,7 +45,7 @@ ehbs.registerHelper("batchRender", (image, batch, entries) => {
   });
 
   return `<div class="container">
-  <div class="dashboardHeader">
+  <div class="mainHeader">
       <img src="data:image/png;base64,${image}">
       <h1><a id="main" href="/">Home</a> | Batch: ${batch} | <a id="main" href="/settings"> Settings</a></h1>
       <button type="submit"><a href="/logout">LOGOUT</a></button>
@@ -116,7 +116,7 @@ ehbs.registerHelper("updateInfoRender", (user, image, batch) => {
   });
 
   return `<div class="container">
-    <div class="dashboardHeader">
+    <div class="mainHeader">
         <img src="data:image/png;base64,${image}">
         <h1> <a id="main" href="/"> Home</a> | Update info</h1>
         <button type="submit"><a href="/logout">LOGOUT</a></button>
