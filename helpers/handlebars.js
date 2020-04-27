@@ -68,7 +68,7 @@ ehbs.registerHelper("registerRender", (batch) => {
       <h1>Register at <a href="/">THE YEAR BOOK.</a></h1>
   </div>
   <div class="mg-1 center">
-      <form class="mg-1 registerForm" action="/register" enctype="multipart/form-data" method="POST">
+      <form class="mg-1 updateForm" action="/register" enctype="multipart/form-data" method="POST">
           <div class="mg-1 center">
               <label class="font-medium" for="username">Name:</label>
               <input class="bottom-border" type="text" name="username">
