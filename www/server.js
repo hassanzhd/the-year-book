@@ -1,7 +1,8 @@
 const http = require("http");
 const app = require("../app");
 
-let PORT = process.env.PORT | 5000;
+let localPORT = 8080;
+let PORT = process.env.PORT | localPORT;
 let server = http.createServer(app);
 
 server.listen(PORT, () => {
