@@ -4,13 +4,13 @@ module.exports.validExt = (__extension) => {
       return true;
     case ".JPG":
       return true;
-    case "jpeg":
+    case ".jpeg":
       return true;
-    case "JPEG":
+    case ".JPEG":
       return true;
-    case "png":
+    case ".png":
       return true;
-    case "PNG":
+    case ".PNG":
       return true;
 
     default:
