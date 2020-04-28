@@ -1,9 +1,9 @@
 if (
   window.innerWidth <= 768 &&
-  window.location.pathname.split("/")[1] === "/batch"
+  window.location.pathname.split("/")[1] === "batch"
 ) {
   let container = document.querySelector(".container");
-  container.classList.add("container-row");
+  container.classList.add("flex-row");
 }
 
 if (
