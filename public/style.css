@@ -490,8 +490,31 @@
 }
 
 @media (max-width: 768px) {
-  .container-row {
+  .flex-column {
+    flex-direction: column;
+  }
+
+  .flex-row {
     flex-direction: row;
+  }
+
+  .user-img-mg {
+    margin-top: 3em;
+  }
+
+  .userContent {
+    margin: 0;
+  }
+
+  .userEntry {
+    width: 100%;
+    align-items: center;
+    margin: 0;
+    box-shadow: none;
+  }
+
+  .userEntry .datadiv h1 {
+    font-size: 1.5em;
   }
 
   .indexHeading h1 {
