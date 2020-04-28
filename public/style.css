@@ -355,6 +355,7 @@
 .bookEntry img {
   width: 230px;
   height: 230px;
+  object-fit: contain;
   border-radius: 50%;
   box-shadow: 5px 10px 8px grey;
 }
@@ -486,4 +487,60 @@
 
 #main:hover {
   color: red;
+}
+
+@media (max-width: 768px) {
+  .container-row {
+    flex-direction: row;
+  }
+
+  .indexHeading h1 {
+    font-size: 4em;
+  }
+
+  .loginHeading h1 {
+    font-size: 2.25em;
+  }
+
+  .registerHeading h1 {
+    font-size: 2em;
+  }
+
+  .mainHeader {
+    flex-direction: column;
+  }
+
+  .mainHeader h1 {
+    font-size: 29px;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  .mainHeading h1 {
+    font-size: 33px;
+  }
+
+  .mainContentButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+  }
+
+  .bookEntry {
+    height: 300px;
+  }
+
+  .bookEntry img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .updateButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }

@@ -53,7 +53,9 @@ ehbs.registerHelper("batchRender", (image, batch, entries) => {
   <div class="bookContent">
       ${entryElement}
   </div>
-</div>`;
+</div>
+<script src="/script.js"></script>
+`;
 });
 
 ehbs.registerHelper("registerRender", (batch) => {
