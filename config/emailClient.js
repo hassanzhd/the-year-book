@@ -12,7 +12,7 @@ let oauth2Client = new OAuth2(
 class mail {
   constructor(__to, __html) {
     this.mailObj = {
-      from: "mails.yearbook@gmail.com",
+      from: process.env.EMAIL_CLIENT_MAIL,
       to: __to,
       subject: "Verification email from The Year Book",
       generateTextFromHTML: true,
@@ -30,7 +30,7 @@ class mail {
         service: "gmail",
         auth: {
           type: "OAuth2",
-          user: "mails.yearbook@gmail.com",
+          user: process.env.EMAIL_CLIENT_MAIL,
           clientId: process.env.EMAIL_CLIENT_ID,
           clientSecret: process.env.EMAIL_CLIENT_SECRET,
           refreshToken: process.env.EMAIL_REFRESH_TOKEN,
