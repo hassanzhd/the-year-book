@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
+
+$titleFont: "Nanum Pen Script";
+$primaryFont: "Montserrat";
+
+$primaryFontColor: rgb(20, 20, 20);
+$primaryHoverFontColor: rgb(230, 54, 54);
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  border: none;
+  padding: 15px 50px;
+  margin: 10px;
+  background-color: $primaryFontColor;
+  color: white;
+  border-radius: 25px;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background-color: $primaryHoverFontColor;
+  transition: 0.5s;
+}

@@ -1,0 +1,40 @@
+@import "@styles/utilities";
+
+.mainHeading {
+  height: 300px;
+  padding-bottom: 40px;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.mainHeading h1 a {
+  text-decoration: none;
+  font-family: $titleFont;
+  font-size: 4rem;
+  color: black;
+}
+
+.mainHeading h2 {
+  font-size: 1rem;
+}
+
+.mainHeading h1 a:hover {
+  color: $primaryHoverFontColor;
+  transition: 0.5s;
+}
+
+.loginForm {
+  flex-direction: column;
+}
+
+.loginForm input[type="text"],
+.loginForm input[type="password"] {
+  border: none;
+  background-color: #ffffff;
+  width: 350px;
+  height: 50px;
+  margin: 10px;
+  padding: 0 20px;
+  border-radius: 25px;
+  font-size: 1rem;
+}
