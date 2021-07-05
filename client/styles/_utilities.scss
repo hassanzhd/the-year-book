@@ -27,3 +27,23 @@ $primaryHoverFontColor: rgb(230, 54, 54);
   background-color: $primaryHoverFontColor;
   transition: 0.5s;
 }
+
+.others .btn {
+  padding: 15px 25px;
+  border-radius: 8px;
+}
+
+@media (min-width: 1024px) {
+  .others {
+    justify-content: flex-end;
+    padding-right: 50px;
+  }
+
+  .others .btn {
+    padding: 15px 25px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 1023px) {
+}
