@@ -1,15 +1,12 @@
 import MainContentStyling from "./MainContent.module.scss";
 import Image from "next/image";
+import NavBar from "@components/NavBar";
 import { getStyleString } from "@helpers/utility";
 
 const MainContent = () => {
   return (
     <>
-      <nav className={getStyleString(MainContentStyling.mainNav, "flex")}>
-        <h1>
-          <a href="/"> The Year Book </a>
-        </h1>
-      </nav>
+      <NavBar />
       <div className="others flex">
         <button className="btn">&#9776;</button>
       </div>

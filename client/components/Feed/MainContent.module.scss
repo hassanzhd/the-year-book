@@ -1,0 +1,26 @@
+@import "@styles/utilities";
+
+.searchForm {
+  height: 500px;
+}
+
+.searchForm input[type="text"] {
+  border: none;
+  background-color: #ffffff;
+  width: 40%;
+  height: 50px;
+  margin: 10px;
+  padding: 0 20px;
+  border-radius: 25px;
+  font-size: 1rem;
+}
+
+@media (max-width: 1023px) {
+  .searchForm {
+    flex-direction: column;
+  }
+
+  .searchForm input[type="text"] {
+    width: 80%;
+  }
+}
