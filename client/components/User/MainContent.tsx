@@ -1,10 +1,11 @@
 import MainContentStyling from "./MainContent.module.scss";
 import Image from "next/image";
+import { getStyleString } from "@helpers/utility";
 
 const MainContent = () => {
   return (
     <>
-      <nav className={`${MainContentStyling.mainNav} flex`}>
+      <nav className={getStyleString(MainContentStyling.mainNav, "flex")}>
         <h1>
           <a href="/"> The Year Book </a>
         </h1>
@@ -12,7 +13,7 @@ const MainContent = () => {
       <div className="others flex">
         <button className="btn">&#9776;</button>
       </div>
-      <main className={`${MainContentStyling.profileData} flex`}>
+      <main className={getStyleString(MainContentStyling.profileData, "flex")}>
         <Image
           src="/user.png"
           alt="Picture of the user"
@@ -30,7 +31,9 @@ const MainContent = () => {
         </p>
         <button className="btn">Sign the book</button>
       </main>
-      <div className={`${MainContentStyling.signatureHeading} flex`}>
+      <div
+        className={getStyleString(MainContentStyling.signatureHeading, "flex")}
+      >
         <h1>Signatures:</h1>
       </div>
       <section className={MainContentStyling.profileSignatures}>
