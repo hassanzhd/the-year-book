@@ -1,0 +1,43 @@
+@import "@styles/utilities";
+
+.mainHeading {
+  margin: 50px 0;
+  flex-direction: column;
+
+  & h1 a {
+    text-decoration: none;
+    font-family: $titleFont;
+    font-size: 4rem;
+    color: black;
+
+    &:hover {
+      color: $primaryHoverFontColor;
+      transition: 0.5s;
+    }
+  }
+
+  & h2 {
+    font-size: 1rem;
+  }
+}
+
+.imageInput {
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.steps {
+  margin: 20px 0;
+}
+
+.step {
+  height: 15px;
+  width: 15px;
+  background-color: rgb(209, 209, 209);
+  margin: 0 10px;
+  border-radius: 50%;
+}
+
+.active {
+  background-color: $primaryFontColor;
+}
