@@ -1,7 +1,12 @@
+@import "~bootstrap/scss/bootstrap";
+@import "utilities";
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: $primaryFont;
+  background-color: #f6f6f6;
 }
 
 a {

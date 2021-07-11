@@ -1,0 +1,43 @@
+.loginForm {
+  flex-direction: column;
+
+  input[type="text"],
+  input[type="password"],
+  textarea {
+    border: none;
+    background-color: #ffffff;
+    width: 350px;
+    height: 50px;
+    margin: 10px;
+    padding: 0 20px;
+    border-radius: 25px;
+    font-size: 1rem;
+  }
+
+  textarea {
+    height: 200px;
+    padding: 15px 20px;
+  }
+
+  input[type="file"] {
+    border: none;
+    width: 350px;
+    height: 50px;
+    padding: 10px 50px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  .loginForm {
+    input[type="text"],
+    input[type="password"],
+    textarea {
+      width: 300px;
+    }
+
+    input[type="file"] {
+      width: 300px;
+    }
+  }
+}

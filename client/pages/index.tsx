@@ -1,8 +1,9 @@
 import Head from "next/head";
+import MainContent from "@components/Home/MainContent";
 
 export default function Home() {
   return (
-    <div>
+    <>
       <Head>
         <title>The Year Book | Login or Sign up </title>
         <meta
@@ -11,7 +12,7 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <a href="#">gage</a>
-    </div>
+      <MainContent />
+    </>
   );
 }
