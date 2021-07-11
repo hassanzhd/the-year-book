@@ -1,7 +1,7 @@
 import Head from "next/head";
 import MainContent from "@components/User/MainContent";
 
-export default function Home({ handle }: { handle: string }) {
+export default function Handle({ handle }: { handle: string }) {
   return (
     <>
       <Head>

@@ -7,11 +7,11 @@ const MainContent = () => {
     <>
       <NavBar />
       <div className="others flex">
-        <button className="btn">&#9776;</button>
+        <button className="button">&#9776;</button>
       </div>
       <form className={getStyleString(MainContentStyling.searchForm, "flex")}>
         <input placeholder="Search using user handle" type="text" required />
-        <button className="btn" type="submit">
+        <button className="button" type="submit">
           Search
         </button>
       </form>

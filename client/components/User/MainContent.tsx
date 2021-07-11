@@ -8,7 +8,7 @@ const MainContent = () => {
     <>
       <NavBar />
       <div className="others flex">
-        <button className="btn">&#9776;</button>
+        <button className="button">&#9776;</button>
       </div>
       <main className={getStyleString(MainContentStyling.profileData, "flex")}>
         <Image
@@ -26,7 +26,7 @@ const MainContent = () => {
           recusandae laborum tempore quos sed. Quos blanditiis minus culpa quae
           incidunt nesciunt deserunt eum?
         </p>
-        <button className="btn">Sign the book</button>
+        <button className="button">Sign the book</button>
       </main>
       <div
         className={getStyleString(MainContentStyling.signatureHeading, "flex")}

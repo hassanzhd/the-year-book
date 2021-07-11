@@ -1,11 +1,11 @@
 import Head from "next/head";
 import MainContent from "@components/Feed/MainContent";
 
-export default function Home() {
+export default function Feed() {
   return (
     <>
       <Head>
-        <title>The Year Book</title>
+        <title>Feed | The Year Book</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainContent />

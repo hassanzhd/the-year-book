@@ -16,7 +16,7 @@ const Step1 = ({
           setStepNumber(stepNumber + 1);
         }}
         type="button"
-        className="btn"
+        className="button"
       >
         Next
       </button>

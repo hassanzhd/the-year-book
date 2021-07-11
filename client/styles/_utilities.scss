@@ -13,7 +13,7 @@ $primaryHoverFontColor: rgb(230, 54, 54);
   justify-content: center;
 }
 
-.btn {
+.button {
   border: none;
   padding: 15px 50px;
   margin: 10px;
@@ -23,12 +23,12 @@ $primaryHoverFontColor: rgb(230, 54, 54);
   font-weight: bold;
 }
 
-.btn:hover {
+.button:hover {
   background-color: $primaryHoverFontColor;
   transition: 0.5s;
 }
 
-.others .btn {
+.others .button {
   padding: 15px 25px;
   border-radius: 8px;
 }
@@ -39,7 +39,7 @@ $primaryHoverFontColor: rgb(230, 54, 54);
     padding-right: 50px;
   }
 
-  .others .btn {
+  .others .button {
     padding: 15px 25px;
     border-radius: 10px;
   }

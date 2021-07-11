@@ -16,12 +16,12 @@ const MainContent = () => {
       <Form>
         <input type="text" placeholder="Enter your Email" required />
         <input type="password" placeholder="Enter your Password" required />
-        <button type="submit" className="btn">
+        <button type="submit" className="button">
           Login
         </button>
       </Form>
       <div className="flex">
-        <button className="btn">Sign up</button>
+        <button className="button">Sign up</button>
       </div>
     </>
   );

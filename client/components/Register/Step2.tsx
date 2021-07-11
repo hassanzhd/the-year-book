@@ -25,11 +25,11 @@ const Step2 = ({
             setStepNumber(stepNumber - 1);
           }}
           type="submit"
-          className="btn"
+          className="button"
         >
           Previous
         </button>
-        <button type="submit" className="btn">
+        <button type="submit" className="button">
           Register
         </button>
       </div>

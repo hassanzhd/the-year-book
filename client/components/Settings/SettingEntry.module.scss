@@ -1,0 +1,29 @@
+.entry {
+  width: 500px;
+  height: 80px;
+  background-color: white;
+  margin-top: 20px;
+  border-radius: 25px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: black;
+    transition: 0.5s;
+
+    p {
+      background-color: black;
+      color: white;
+      transition: 0.5s;
+    }
+  }
+
+  p {
+    background-color: white;
+  }
+}
+
+@media (max-width: 1023px) {
+  .entry {
+    width: 300px;
+  }
+}

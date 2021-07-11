@@ -1,11 +1,11 @@
 import Head from "next/head";
-import MainContent from "@components/Register/MainContent";
+import MainContent from "@components/Settings/MainContent";
 
-export default function Register() {
+export default function Settings() {
   return (
     <>
       <Head>
-        <title>The Year Book | Register your account</title>
+        <title>Settings | The Year Book</title>
         <meta
           name="description"
           content="Register your account into the year book"
