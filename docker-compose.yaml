@@ -7,3 +7,9 @@ services:
     restart: always
     ports:
       - "3000:3000"
+  api:
+    container_name: api
+    build: ./api
+    restart: always
+    ports:
+      - "5000:5000"
