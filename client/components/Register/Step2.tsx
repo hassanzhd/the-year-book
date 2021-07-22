@@ -13,6 +13,7 @@ const Step2 = ({
     <>
       <input type="text" placeholder="Enter your handle" required />
       <input type="text" placeholder="Enter your full name" required />
+      <input type="text" placeholder="Enter your university" required />
       <input type="text" placeholder="Enter your batch" required />
       <textarea placeholder="Enter a short bio" required />
       <div className={getStyleString(MainContentStyling.imageInput, "flex")}>
