@@ -19,6 +19,7 @@ const MainContent = () => {
         />
         <h1>@hassanzhd</h1>
         <h2>Muhammad Hassan Zahid</h2>
+        <h2>FAST NUCES KHI</h2>
         <h2>Batch: 2018</h2>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
