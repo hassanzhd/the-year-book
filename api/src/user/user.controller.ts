@@ -1,8 +1,6 @@
 import {
   Body,
   Controller,
-  Header,
-  Ip,
   Post,
   UploadedFile,
   UseInterceptors,
