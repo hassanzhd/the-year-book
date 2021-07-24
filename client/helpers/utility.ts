@@ -1,3 +1,13 @@
+export class StateWrapper {
+  state: any;
+  setter: any;
+
+  constructor([__state, __setter]: [__state: any, __setter: any]) {
+    this.state = __state;
+    this.setter = __setter;
+  }
+}
+
 export const getStyleString = (...styles: string[]): string => {
   let resultantStyle: string = "";
 

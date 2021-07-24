@@ -1,51 +1,47 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { StateWrapper } from "@helpers/utility";
+import { useState } from "react";
 import { Alert } from "react-bootstrap";
 import { Step1Validator } from "./Step1.validator";
+import { InputField, InputFieldAttributes } from "@components/Form/Field";
 
-const Step1 = ({
-  stepNumber,
-  setStepNumber,
-}: {
-  stepNumber: number;
-  setStepNumber: Dispatch<SetStateAction<number>>;
-}) => {
+const Step1 = ({ stepNumber }: { stepNumber: StateWrapper }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
+  const emailFieldAttributes = new InputFieldAttributes({
+    onChange: (event: any) => {
+      setEmail(event.target.value);
+    },
+    type: "text",
+    placeHolder: "Enter your Email",
+  });
+
+  const passwordFieldAttributes = new InputFieldAttributes({
+    onChange: (event: any) => {
+      setPassword(event.target.value);
+    },
+    type: "password",
+    placeHolder: "Enter your Password",
+  });
+
+  const nextStep = () => {
+    const validator = new Step1Validator();
+    try {
+      if (validator.isValid(email, password)) {
+        stepNumber.setter(stepNumber.state + 1);
+      }
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
+  };
+
   return (
     <>
       {errorMessage ? <Alert variant="danger">{errorMessage}</Alert> : " "}
-      <input
-        onChange={(event) => {
-          setEmail(event.target.value);
-        }}
-        value={email}
-        type="text"
-        placeholder="Enter your Email"
-      />
-      <input
-        onChange={(event) => {
-          setPassword(event.target.value);
-        }}
-        value={password}
-        type="password"
-        placeholder="Enter your Password"
-      />
-      <button
-        onClick={() => {
-          const validator = new Step1Validator();
-          try {
-            if (validator.isValid(email, password)) {
-              setStepNumber(stepNumber + 1);
-            }
-          } catch (error) {
-            setErrorMessage(error.message);
-          }
-        }}
-        type="button"
-        className="button"
-      >
+      <InputField attributes={emailFieldAttributes} />
+      <InputField attributes={passwordFieldAttributes} />
+      <button onClick={nextStep} type="button" className="button">
         Next
       </button>
     </>
