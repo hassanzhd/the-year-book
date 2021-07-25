@@ -36,7 +36,6 @@ export const InputField = ({
   attributes: InputFieldAttributes;
 }) => {
   const { onChange, type, placeHolder } = attributes;
-  console.log(placeHolder);
   return <input onChange={onChange} type={type} placeholder={placeHolder} />;
 };
 

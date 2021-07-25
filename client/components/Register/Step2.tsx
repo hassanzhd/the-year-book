@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import MainContentStyling from "./MainContent.module.scss";
 import { getStyleString, StateWrapper } from "@helpers/utility";
 import { Step2Validator } from "./Step2Validator";
@@ -11,19 +11,26 @@ import {
   TextAreaField,
   ImageField,
 } from "@components/Form/Field";
+import { registerContextI, registerContext } from "./RegisterContext";
 
-const Step2 = ({ stepNumber }: { stepNumber: StateWrapper }) => {
-  const [handle, setHandle] = useState<string>("");
-  const [fullName, setFullName] = useState<string>("");
-  const [university, setUniversity] = useState<string>("");
-  const [batch, setBatch] = useState<number>(0);
-  const [shortBio, setShortBio] = useState<string>("");
-  const [image, setImage] = useState<File>();
+const Step2 = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const {
+    stepNumber,
+    email,
+    password,
+    handle,
+    fullName,
+    university,
+    batch,
+    shortBio,
+    image,
+  } = useContext<registerContextI>(registerContext);
 
   const handleFieldAttributes = new InputFieldAttributes({
     onChange: (event: any) => {
-      setHandle(event.target.value);
+      handle.setter(event.target.value);
     },
     type: "text",
     placeHolder: "Enter your handle",
@@ -31,7 +38,7 @@ const Step2 = ({ stepNumber }: { stepNumber: StateWrapper }) => {
 
   const fullNameFieldAttributes = new InputFieldAttributes({
     onChange: (event: any) => {
-      setFullName(event.target.value);
+      fullName.setter(event.target.value);
     },
     type: "text",
     placeHolder: "Enter your full name",
@@ -39,7 +46,7 @@ const Step2 = ({ stepNumber }: { stepNumber: StateWrapper }) => {
 
   const universityFieldAttributes = new InputFieldAttributes({
     onChange: (event: any) => {
-      setUniversity(event.target.value);
+      university.setter(event.target.value);
     },
     type: "text",
     placeHolder: "Enter your university",
@@ -47,7 +54,7 @@ const Step2 = ({ stepNumber }: { stepNumber: StateWrapper }) => {
 
   const batchFieldAttributes = new InputFieldAttributes({
     onChange: (event: any) => {
-      setBatch(event.target.value);
+      batch.setter(event.target.value);
     },
     type: "text",
     placeHolder: "Enter your batch",
@@ -55,14 +62,14 @@ const Step2 = ({ stepNumber }: { stepNumber: StateWrapper }) => {
 
   const shortBioFieldAttributes = new TextAreaFieldAttributes({
     onChange: (event: any) => {
-      setShortBio(event.target.value);
+      shortBio.setter(event.target.value);
     },
     placeHolder: "Enter your short bio",
   });
 
   const imageFieldAttributes = new ImageFieldAttiributes({
     onChange: (event: any) => {
-      setImage(event.target.value);
+      image.setter(event.target.files[0]);
     },
     type: "file",
   });
@@ -77,8 +84,31 @@ const Step2 = ({ stepNumber }: { stepNumber: StateWrapper }) => {
 
     try {
       if (
-        validator.isValid(handle, fullName, university, batch, shortBio, image)
+        validator.isValid(
+          handle.state,
+          fullName.state,
+          university.state,
+          batch.state,
+          shortBio.state,
+          image.state
+        )
       ) {
+        const formData = new FormData();
+        formData.append("email", email.state);
+        formData.append("password", password.state);
+        formData.append("handle", handle.state);
+        formData.append("fullName", fullName.state);
+        formData.append("university", university.state);
+        formData.append("batch", batch.state);
+        formData.append("shortBio", shortBio.state);
+        formData.append("file", image.state);
+
+        fetch("http://localhost:5000/user/register", {
+          method: "POST",
+          body: formData,
+        }).then((res) => {
+          console.log(res);
+        });
       }
     } catch (error) {
       setErrorMessage(error.message);

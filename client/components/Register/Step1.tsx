@@ -1,17 +1,18 @@
-import { StateWrapper } from "@helpers/utility";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Alert } from "react-bootstrap";
 import { Step1Validator } from "./Step1.validator";
 import { InputField, InputFieldAttributes } from "@components/Form/Field";
+import { registerContext, registerContextI } from "./RegisterContext";
 
-const Step1 = ({ stepNumber }: { stepNumber: StateWrapper }) => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+const Step1 = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const { stepNumber, email, password } =
+    useContext<registerContextI>(registerContext);
 
   const emailFieldAttributes = new InputFieldAttributes({
     onChange: (event: any) => {
-      setEmail(event.target.value);
+      email.setter(event.target.value);
     },
     type: "text",
     placeHolder: "Enter your Email",
@@ -19,7 +20,7 @@ const Step1 = ({ stepNumber }: { stepNumber: StateWrapper }) => {
 
   const passwordFieldAttributes = new InputFieldAttributes({
     onChange: (event: any) => {
-      setPassword(event.target.value);
+      password.setter(event.target.value);
     },
     type: "password",
     placeHolder: "Enter your Password",
@@ -28,7 +29,7 @@ const Step1 = ({ stepNumber }: { stepNumber: StateWrapper }) => {
   const nextStep = () => {
     const validator = new Step1Validator();
     try {
-      if (validator.isValid(email, password)) {
+      if (validator.isValid(email.state, password.state)) {
         stepNumber.setter(stepNumber.state + 1);
       }
     } catch (error) {

@@ -19,11 +19,8 @@ export class Step2Validator {
     }
 
     if (isNaN(__batch)) {
-      console.log(__batch);
-      console.log("inside");
       throw new Error("Enter a valid value for Batch");
     }
-    console.log("outside");
     throw new Error("Batch cannot be empty");
   }
 

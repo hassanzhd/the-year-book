@@ -1,9 +1,10 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useContext } from "react";
 import MainContentStyling from "./MainContent.module.scss";
-import { StateWrapper, getStyleString } from "@helpers/utility";
+import { getStyleString } from "@helpers/utility";
 import Form from "@components/Form";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
+import { registerContext, registerContextI } from "./RegisterContext";
 
 const getStepDivs = (__numberOfSteps: number, __stepNumber: number) => {
   let stepDivs: ReactElement<any, any>[] = [];
@@ -27,7 +28,7 @@ const getStepDivs = (__numberOfSteps: number, __stepNumber: number) => {
 };
 
 const MainContent = () => {
-  const stepNumber: StateWrapper = new StateWrapper(useState<number>(0));
+  const { stepNumber } = useContext<registerContextI>(registerContext);
 
   return (
     <>
@@ -40,11 +41,7 @@ const MainContent = () => {
         <h2>Register your account.</h2>
       </header>
       <Form>
-        {stepNumber.state === 0 ? (
-          <Step1 stepNumber={stepNumber} />
-        ) : (
-          <Step2 stepNumber={stepNumber} />
-        )}
+        {stepNumber.state === 0 ? <Step1 /> : <Step2 />}
         <div className={getStyleString(MainContentStyling.steps, "flex")}>
           {getStepDivs(2, stepNumber.state)}
         </div>

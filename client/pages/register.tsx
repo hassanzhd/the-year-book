@@ -1,5 +1,6 @@
 import Head from "next/head";
 import MainContent from "@components/Register/MainContent";
+import RegisterProvider from "@components/Register/RegisterContext";
 
 export default function Register() {
   return (
@@ -12,7 +13,9 @@ export default function Register() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainContent />
+      <RegisterProvider>
+        <MainContent />
+      </RegisterProvider>
     </>
   );
 }
