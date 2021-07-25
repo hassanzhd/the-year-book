@@ -2,21 +2,27 @@ export class InputFieldAttributes {
   onChange: (event: any) => void;
   type: string;
   placeHolder: string;
+  value: any;
+  id: string;
 
-  constructor({ onChange, type, placeHolder }: any) {
+  constructor({ onChange, type, placeHolder, value = "", id }: any) {
     this.onChange = onChange;
     this.type = type;
     this.placeHolder = placeHolder;
+    this.value = value;
+    this.id = id;
   }
 }
 
 export class TextAreaFieldAttributes {
   onChange: (event: any) => void;
   placeHolder: string;
+  id: string;
 
-  constructor({ onChange, placeHolder }: any) {
+  constructor({ onChange, placeHolder, id }: any) {
     this.onChange = onChange;
     this.placeHolder = placeHolder;
+    this.id = id;
   }
 }
 
@@ -35,8 +41,16 @@ export const InputField = ({
 }: {
   attributes: InputFieldAttributes;
 }) => {
-  const { onChange, type, placeHolder } = attributes;
-  return <input onChange={onChange} type={type} placeholder={placeHolder} />;
+  const { value, onChange, type, placeHolder, id } = attributes;
+  return (
+    <input
+      id={id}
+      value={value}
+      onChange={onChange}
+      type={type}
+      placeholder={placeHolder}
+    />
+  );
 };
 
 export const TextAreaField = ({
@@ -44,8 +58,8 @@ export const TextAreaField = ({
 }: {
   attributes: TextAreaFieldAttributes;
 }) => {
-  const { onChange, placeHolder } = attributes;
-  return <textarea onChange={onChange} placeholder={placeHolder} />;
+  const { onChange, placeHolder, id } = attributes;
+  return <textarea id={id} onChange={onChange} placeholder={placeHolder} />;
 };
 
 export const ImageField = ({

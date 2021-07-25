@@ -12,9 +12,12 @@ import {
   ImageField,
 } from "@components/Form/Field";
 import { registerContextI, registerContext } from "./RegisterContext";
+import { useRouter } from "next/router";
 
 const Step2 = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [successMessage, setSuccessMessage] = useState<string>("");
+  const router = useRouter();
 
   const {
     stepNumber,
@@ -32,6 +35,8 @@ const Step2 = () => {
     onChange: (event: any) => {
       handle.setter(event.target.value);
     },
+    id: "handle",
+    value: handle.state,
     type: "text",
     placeHolder: "Enter your handle",
   });
@@ -40,6 +45,8 @@ const Step2 = () => {
     onChange: (event: any) => {
       fullName.setter(event.target.value);
     },
+    id: "fullName",
+    value: fullName.state,
     type: "text",
     placeHolder: "Enter your full name",
   });
@@ -48,6 +55,8 @@ const Step2 = () => {
     onChange: (event: any) => {
       university.setter(event.target.value);
     },
+    id: "university",
+    value: university.state,
     type: "text",
     placeHolder: "Enter your university",
   });
@@ -56,6 +65,8 @@ const Step2 = () => {
     onChange: (event: any) => {
       batch.setter(event.target.value);
     },
+    id: "batch",
+    value: batch.state,
     type: "text",
     placeHolder: "Enter your batch",
   });
@@ -64,6 +75,7 @@ const Step2 = () => {
     onChange: (event: any) => {
       shortBio.setter(event.target.value);
     },
+    id: "shortBio",
     placeHolder: "Enter your short bio",
   });
 
@@ -75,10 +87,17 @@ const Step2 = () => {
   });
 
   const previousStep = () => {
+    password.setter("");
+    handle.setter("");
+    fullName.setter("");
+    university.setter("");
+    batch.setter("");
+    shortBio.setter("");
+    image.setter(undefined);
     stepNumber.setter(stepNumber.state - 1);
   };
 
-  const nextStep = (event: any) => {
+  const nextStep = async (event: any) => {
     event.preventDefault();
     const validator = new Step2Validator();
 
@@ -103,12 +122,23 @@ const Step2 = () => {
         formData.append("shortBio", shortBio.state);
         formData.append("file", image.state);
 
-        fetch("http://localhost:5000/user/register", {
+        const response = await fetch("http://localhost:5000/user/register", {
           method: "POST",
           body: formData,
-        }).then((res) => {
-          console.log(res);
         });
+
+        if (!response.ok) {
+          const data = await response.json();
+          throw new Error(data.message[0]);
+        }
+
+        const data = await response.json();
+        setErrorMessage("");
+        setSuccessMessage(data.message);
+
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
       }
     } catch (error) {
       setErrorMessage(error.message);
@@ -118,6 +148,7 @@ const Step2 = () => {
   return (
     <>
       {errorMessage ? <Alert variant="danger">{errorMessage}</Alert> : ""}
+      {successMessage ? <Alert variant="success">{successMessage}</Alert> : ""}
       <InputField attributes={handleFieldAttributes} />
       <InputField attributes={fullNameFieldAttributes} />
       <InputField attributes={universityFieldAttributes} />
@@ -128,10 +159,15 @@ const Step2 = () => {
         <ImageField attributes={imageFieldAttributes} />
       </div>
       <div>
-        <button onClick={previousStep} type="submit" className="button">
+        <button
+          id="previousButton"
+          onClick={previousStep}
+          type="submit"
+          className="button"
+        >
           Previous
         </button>
-        <button onClick={nextStep} className="button">
+        <button id="registerButton" onClick={nextStep} className="button">
           Register
         </button>
       </div>

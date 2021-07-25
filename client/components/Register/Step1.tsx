@@ -14,6 +14,8 @@ const Step1 = () => {
     onChange: (event: any) => {
       email.setter(event.target.value);
     },
+    id: "email",
+    value: email.state,
     type: "text",
     placeHolder: "Enter your Email",
   });
@@ -22,6 +24,8 @@ const Step1 = () => {
     onChange: (event: any) => {
       password.setter(event.target.value);
     },
+    id: "password",
+    value: password.state,
     type: "password",
     placeHolder: "Enter your Password",
   });
@@ -42,7 +46,12 @@ const Step1 = () => {
       {errorMessage ? <Alert variant="danger">{errorMessage}</Alert> : " "}
       <InputField attributes={emailFieldAttributes} />
       <InputField attributes={passwordFieldAttributes} />
-      <button onClick={nextStep} type="button" className="button">
+      <button
+        id="nextButton"
+        onClick={nextStep}
+        type="button"
+        className="button"
+      >
         Next
       </button>
     </>

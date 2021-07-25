@@ -24,7 +24,7 @@ const RegisterProvider = ({ children }: { children: any }) => {
   const handle: StateWrapper = new StateWrapper(useState<string>(""));
   const fullName: StateWrapper = new StateWrapper(useState<string>(""));
   const university: StateWrapper = new StateWrapper(useState<string>(""));
-  const batch: StateWrapper = new StateWrapper(useState<number>(0));
+  const batch: StateWrapper = new StateWrapper(useState<number>(20));
   const shortBio: StateWrapper = new StateWrapper(useState<string>(""));
   const image: StateWrapper = new StateWrapper(useState<File>());
 
