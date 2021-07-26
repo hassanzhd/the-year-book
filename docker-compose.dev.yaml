@@ -21,10 +21,13 @@ services:
       dockerfile: Dockerfile.dev
     image: api_dev
     volumes:
-      - "./api:/app"
+      - "./api/src:/app/src"
     restart: always
     ports:
       - "5000:5000"
+    environment:
+      DB_PASSWORD: ${PASSWORD}
+      DB_DATABASE: ${DATABASE}
     depends_on:
       - db
   db:
