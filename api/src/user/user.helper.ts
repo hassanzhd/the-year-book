@@ -3,7 +3,7 @@ import { randomBytes } from 'crypto';
 
 @Injectable()
 export class UserHelper {
-  uploadFile(__file: Express.Multer.File) {
+  uploadImage(__file: Express.Multer.File) {
     console.log(__file);
   }
 
