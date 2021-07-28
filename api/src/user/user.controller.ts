@@ -7,7 +7,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { RegisterUserDto } from './user.dto';
+import { GetUserDto, RegisterUserDto } from './user.dto';
 import { UserHelper } from './user.helper';
 import { UsersService } from './user.service';
 
@@ -17,10 +17,14 @@ export class UserController {
     private readonly userService: UsersService,
     private readonly userHelper: UserHelper,
   ) {}
+
   @Get()
-  findAll() {
-    return this.userService.findAll();
+  async findAll() {
+    const users = await this.userService.findAll();
+    const transformmedDtoUsers = GetUserDto.fromUserEntities(users);
+    return transformmedDtoUsers;
   }
+
   @Post('register')
   @UseInterceptors(FileInterceptor('file'))
   async register(
@@ -29,9 +33,12 @@ export class UserController {
   ) {
     this.userHelper.uploadImage(file);
     const verificationHash = this.userHelper.generateVerificationHash();
+    const hashedPassword = await this.userHelper.generateHashedPassword(
+      body.password,
+    );
     await this.userService.createUser(
       body.email,
-      body.password,
+      hashedPassword,
       body.handle,
       body.fullName,
       body.university,

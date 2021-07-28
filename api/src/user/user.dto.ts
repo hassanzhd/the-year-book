@@ -5,6 +5,36 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { User } from './user.entity';
+
+export class GetUserDto {
+  readonly email: string;
+  readonly handle: string;
+  readonly fullName: string;
+  readonly university: string;
+  readonly shortBio: string;
+  readonly batch: number;
+  readonly imageLink: string;
+
+  constructor(__user: User) {
+    this.email = __user.email;
+    this.handle = __user.handle;
+    this.fullName = __user.fullName;
+    this.university = __user.university;
+    this.shortBio = __user.shortBio;
+    this.batch = __user.batch;
+    this.imageLink = __user.imageLink;
+  }
+
+  static fromUserEntities(__users: User[]): GetUserDto[] {
+    const transformmedUsers = __users.map((__user: User) => {
+      const transformmedUser = new GetUserDto(__user);
+      return transformmedUser;
+    });
+
+    return transformmedUsers;
+  }
+}
 
 export class RegisterUserDto {
   @IsEmail()
