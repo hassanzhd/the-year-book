@@ -1,6 +1,7 @@
 import MainContentStyling from "./MainContent.module.scss";
 import { getStyleString } from "@helpers/utility";
 import Form from "@components/Form";
+import Link from "next/link";
 
 const MainContent = () => {
   return (
@@ -21,7 +22,9 @@ const MainContent = () => {
         </button>
       </Form>
       <div className="flex">
-        <button className="button">Sign up</button>
+        <button className="button">
+          <Link href="/register">Sign up</Link>
+        </button>
       </div>
     </>
   );
