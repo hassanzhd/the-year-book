@@ -12,6 +12,8 @@ services:
     restart: always
     ports:
       - "3000:3000"
+    depends_on:
+      - api
   api:
     container_name: api
     build:
@@ -19,7 +21,21 @@ services:
       dockerfile: Dockerfile.dev
     image: api_dev
     volumes:
-      - "./api:/app"
+      - "./api/src:/app/src"
     restart: always
     ports:
       - "5000:5000"
+    environment:
+      DB_PASSWORD: ${PASSWORD}
+      DB_DATABASE: ${DATABASE}
+    depends_on:
+      - db
+  db:
+    container_name: db
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${PASSWORD}
+      MYSQL_DATABASE: ${DATABASE}
+    ports:
+      - "3306:3306"

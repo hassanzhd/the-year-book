@@ -20,6 +20,11 @@
       "@helpers/*": ["helpers/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "cypress/integration/registerPage.spec.js"
+  ],
   "exclude": ["node_modules"]
 }
