@@ -1,3 +1,4 @@
+import { Dispatch } from "react";
 import Error from "./error";
 
 namespace Auth {
@@ -6,9 +7,14 @@ namespace Auth {
   }
 
   export type loginUserDispatchTypes =
-    | loginUserDispatch
+    | Auth.loginUserDispatch
     | Error.clearErrorAction
     | Error.getErrorAction;
+
+  export type loginUserType = (
+    __email: string,
+    __password: string
+  ) => (dispatch: Dispatch<loginUserDispatchTypes>) => Promise<void>;
 }
 
 export default Auth;

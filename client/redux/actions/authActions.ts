@@ -4,7 +4,7 @@ import API from "API";
 import { clearError, getError } from "./errorActions";
 import Auth from "redux/interfaces/auth";
 
-export const loginUser =
+export const loginUser: Auth.loginUserType =
   (__email: string, __password: string) =>
   async (dispatch: Dispatch<Auth.loginUserDispatchTypes>): Promise<void> => {
     try {
