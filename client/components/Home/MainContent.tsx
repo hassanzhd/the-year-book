@@ -53,7 +53,7 @@ const MainContent: React.FC<componentPropType> = ({
         className={getStyleString(MainContentStyling.mainHeading, "flex")}
       >
         <h1>
-          <a href="#">The Year Book</a>
+          <Link href="/">The Year Book</Link>
         </h1>
         <h2>Login into your account.</h2>
       </header>

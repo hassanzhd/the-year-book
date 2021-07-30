@@ -6,12 +6,10 @@ import {
 import API from "API";
 import { clearError, getError } from "./errorActions";
 import Auth from "redux/interfaces/auth";
-import Error from "redux/interfaces/error";
 import Router from "next/router";
 
 export const loginUser: Auth.loginUserType =
-  (__email: string, __password: string) =>
-  async (dispatch: Dispatch<Auth.loginUserDispatchTypes>): Promise<void> => {
+  (__email, __password) => async (dispatch) => {
     try {
       const validator = new UserMainValidator();
       if (validator.isValid(__email, __password)) {
@@ -31,11 +29,11 @@ export const loginUser: Auth.loginUserType =
   };
 
 export const registerUserNextStep: Auth.registerUserNextStepType =
-  (__email, __password, __stepNumber, __setStepNumber) =>
-  (dispatch: Dispatch<Error.getErrorAction>) => {
+  (__email, __password, __stepNumber, __setStepNumber) => (dispatch) => {
     try {
       const validator = new UserMainValidator();
       if (validator.isValid(__email, __password)) {
+        dispatch(clearError());
         __setStepNumber(__stepNumber + 1);
       }
     } catch (error) {
@@ -44,8 +42,7 @@ export const registerUserNextStep: Auth.registerUserNextStepType =
   };
 
 export const registerUserSecondStep: Auth.registerUserSecondStepType =
-  (__user: Auth.User) =>
-  async (dispatch: Dispatch<Auth.registerUserDispatchTypes>) => {
+  (__user) => async (dispatch) => {
     try {
       const validator = new UserOtherValidator();
       if (

@@ -15,6 +15,8 @@ import { connect, InferThunkActionCreatorType } from "react-redux";
 import Auth from "redux/interfaces/auth";
 import { registerUserSecondStep } from "redux/actions/authActions";
 import { ApplicationState } from "redux/reducers";
+import { store } from "redux/store";
+import { clearError } from "redux/actions/errorActions";
 
 interface componentPropType {
   errorMessage: string;
@@ -102,12 +104,13 @@ const Step2: React.FC<componentPropType> = ({
     batch.setter("");
     shortBio.setter("");
     image.setter(undefined);
+    store.dispatch(clearError());
     stepNumber.setter(stepNumber.state - 1);
   };
 
   const nextStep = async (event: any) => {
     event.preventDefault();
-    const a = registerUserSecondStep({
+    registerUserSecondStep({
       email: email.state,
       password: password.state,
       handle: handle.state,

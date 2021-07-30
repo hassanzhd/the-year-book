@@ -59,7 +59,9 @@ namespace Auth {
     __password: string,
     __stepNumber: number,
     __setStepNumber: Dispatch<SetStateAction<number>>
-  ) => (dispatch: Dispatch<Error.getErrorAction>) => void;
+  ) => (
+    dispatch: Dispatch<Error.getErrorAction | Error.clearErrorAction>
+  ) => void;
 
   export type registerUserDispatchTypes =
     | Error.clearErrorAction

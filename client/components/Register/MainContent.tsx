@@ -5,6 +5,7 @@ import Form from "@components/Form";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import { registerContext, registerContextI } from "./RegisterContext";
+import Link from "next/link";
 
 const getStepDivs = (__numberOfSteps: number, __stepNumber: number) => {
   let stepDivs: ReactElement<any, any>[] = [];
@@ -36,7 +37,7 @@ const MainContent = () => {
         className={getStyleString(MainContentStyling.mainHeading, "flex")}
       >
         <h1>
-          <a href="#">The Year Book</a>
+          <Link href="/">The Year Book</Link>
         </h1>
         <h2>Register your account.</h2>
       </header>

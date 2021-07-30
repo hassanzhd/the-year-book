@@ -1,7 +1,7 @@
 import { GET_ERROR, CLEAR_ERROR } from "./types";
 import Error from "redux/interfaces/error";
 
-export const getError: Error.getErrorType = (__message: string) => ({
+export const getError: Error.getErrorType = (__message) => ({
   type: GET_ERROR,
   payload: { message: __message },
 });
