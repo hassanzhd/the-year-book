@@ -1,7 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import MainContentStyling from "./MainContent.module.scss";
-import { getStyleString, StateWrapper } from "@helpers/utility";
-import { Step2Validator } from "./Step2Validator";
+import { getStyleString } from "@helpers/utility";
 import { Alert } from "react-bootstrap";
 import {
   InputFieldAttributes,
@@ -12,13 +11,22 @@ import {
   ImageField,
 } from "@components/Form/Field";
 import { registerContextI, registerContext } from "./RegisterContext";
-import { useRouter } from "next/router";
+import { connect, InferThunkActionCreatorType } from "react-redux";
+import Auth from "redux/interfaces/auth";
+import { registerUserSecondStep } from "redux/actions/authActions";
+import { ApplicationState } from "redux/reducers";
 
-const Step2 = () => {
-  const [errorMessage, setErrorMessage] = useState<string>("");
-  const [successMessage, setSuccessMessage] = useState<string>("");
-  const router = useRouter();
+interface componentPropType {
+  errorMessage: string;
+  successMessage: string;
+  registerUserSecondStep: InferThunkActionCreatorType<Auth.registerUserSecondStepType>;
+}
 
+const Step2: React.FC<componentPropType> = ({
+  errorMessage,
+  successMessage,
+  registerUserSecondStep,
+}) => {
   const {
     stepNumber,
     email,
@@ -99,50 +107,16 @@ const Step2 = () => {
 
   const nextStep = async (event: any) => {
     event.preventDefault();
-    const validator = new Step2Validator();
-
-    try {
-      if (
-        validator.isValid(
-          handle.state,
-          fullName.state,
-          university.state,
-          batch.state,
-          shortBio.state,
-          image.state
-        )
-      ) {
-        const formData = new FormData();
-        formData.append("email", email.state);
-        formData.append("password", password.state);
-        formData.append("handle", handle.state);
-        formData.append("fullName", fullName.state);
-        formData.append("university", university.state);
-        formData.append("batch", batch.state);
-        formData.append("shortBio", shortBio.state);
-        formData.append("file", image.state);
-
-        const response = await fetch("http://localhost:5000/user/register", {
-          method: "POST",
-          body: formData,
-        });
-
-        if (!response.ok) {
-          const data = await response.json();
-          throw new Error(data.message[0]);
-        }
-
-        const data = await response.json();
-        setErrorMessage("");
-        setSuccessMessage(data.message);
-
-        setTimeout(() => {
-          router.push("/");
-        }, 2000);
-      }
-    } catch (error) {
-      setErrorMessage(error.message);
-    }
+    const a = registerUserSecondStep({
+      email: email.state,
+      password: password.state,
+      handle: handle.state,
+      fullName: fullName.state,
+      university: university.state,
+      batch: batch.state,
+      shortBio: shortBio.state,
+      image: image.state,
+    });
   };
 
   return (
@@ -175,4 +149,9 @@ const Step2 = () => {
   );
 };
 
-export default Step2;
+const mapStateToProps = (state: ApplicationState) => ({
+  errorMessage: state.error.message,
+  successMessage: state.auth.successMessage,
+});
+
+export default connect(mapStateToProps, { registerUserSecondStep })(Step2);
