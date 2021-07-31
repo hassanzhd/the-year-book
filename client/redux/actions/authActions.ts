@@ -15,8 +15,8 @@ export const loginUser: Auth.loginUserType =
       if (validator.isValid(__email, __password)) {
         const api = new API();
         const data = await api.postRequest("http://localhost:5000/user/login", {
-          __email,
-          __password,
+          email: __email,
+          password: __password,
         });
         dispatch(clearError());
         dispatch({
