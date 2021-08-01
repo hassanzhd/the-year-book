@@ -61,7 +61,12 @@ const MainContent: React.FC<componentPropType> = ({
         {errorMessage ? <Alert variant="danger">{errorMessage}</Alert> : ""}
         <InputField attributes={emailFieldAttributes} />
         <InputField attributes={passwordFieldAttributes} />
-        <button onClick={onSubmit} type="submit" className="button">
+        <button
+          id="loginButton"
+          onClick={onSubmit}
+          type="submit"
+          className="button"
+        >
           Login
         </button>
       </Form>

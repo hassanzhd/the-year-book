@@ -14,7 +14,7 @@ export const loginUser: Auth.loginUserType =
       const validator = new UserMainValidator();
       if (validator.isValid(__email, __password)) {
         const api = new API();
-        const data = await api.postRequest("http://localhost:5000/user/login", {
+        const data = await api.postRequest("http://localhost:5000/auth/login", {
           email: __email,
           password: __password,
         });
@@ -22,6 +22,7 @@ export const loginUser: Auth.loginUserType =
         dispatch({
           type: "LOGIN_USER",
         });
+        console.log(data);
       }
     } catch (error) {
       dispatch(getError(error.message));
