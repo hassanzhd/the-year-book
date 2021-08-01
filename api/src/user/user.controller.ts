@@ -52,20 +52,15 @@ export class UserController {
     @UploadedFile() file: Express.Multer.File,
     @Body() body: RegisterUserDto,
   ) {
-    this.userHelper.uploadImage(file);
-    const verificationHash = this.userHelper.generateVerificationHash();
-    const hashedPassword = await this.userHelper.generateHashedPassword(
-      body.password,
-    );
     await this.userService.createUser(
       body.email,
-      hashedPassword,
+      body.password,
       body.handle,
       body.fullName,
       body.university,
       body.shortBio,
       parseInt(body.batch),
-      verificationHash,
+      file,
     );
     return { message: 'User succesfully registered.' };
   }
