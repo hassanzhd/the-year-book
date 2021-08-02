@@ -9,7 +9,11 @@ export class AuthController {
 
   @Post('login')
   async login(@Res() response: Response, @Body() body: LoginDto) {
-    await this.authService.login(body);
+    const accessToken = await this.authService.login(body);
+    response.cookie('accessToken', accessToken, {
+      httpOnly: true,
+      sameSite: 'strict',
+    });
     response
       .status(HttpStatus.OK)
       .json({ message: 'User successfully logged in' });

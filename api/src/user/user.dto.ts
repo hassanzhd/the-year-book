@@ -34,6 +34,11 @@ export class GetUserDto {
 
     return transformmedUsers;
   }
+
+  static fromUserEntity(__user: User): GetUserDto {
+    const transformmedUser = new GetUserDto(__user);
+    return transformmedUser;
+  }
 }
 
 export class RegisterUserDto {

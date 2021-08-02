@@ -4,9 +4,12 @@ import {
   Get,
   Post,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { RequestDecodedUser } from './user.decorator';
 import { GetUserDto, RegisterUserDto } from './user.dto';
 import { UsersService } from './user.service';
 
@@ -15,7 +18,9 @@ export class UserController {
   constructor(private readonly userService: UsersService) {}
 
   @Get()
-  async findAll() {
+  @UseGuards(AuthGuard)
+  async findAll(@RequestDecodedUser() user: GetUserDto) {
+    console.log(user);
     const users = await this.userService.findAll();
     const transformmedDtoUsers = GetUserDto.fromUserEntities(users);
     return transformmedDtoUsers;
