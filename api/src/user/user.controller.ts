@@ -8,15 +8,11 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { GetUserDto, RegisterUserDto } from './user.dto';
-import { UserHelper } from './user.helper';
 import { UsersService } from './user.service';
 
 @Controller('user')
 export class UserController {
-  constructor(
-    private readonly userService: UsersService,
-    private readonly userHelper: UserHelper,
-  ) {}
+  constructor(private readonly userService: UsersService) {}
 
   @Get()
   async findAll() {
@@ -31,20 +27,15 @@ export class UserController {
     @UploadedFile() file: Express.Multer.File,
     @Body() body: RegisterUserDto,
   ) {
-    this.userHelper.uploadImage(file);
-    const verificationHash = this.userHelper.generateVerificationHash();
-    const hashedPassword = await this.userHelper.generateHashedPassword(
-      body.password,
-    );
     await this.userService.createUser(
       body.email,
-      hashedPassword,
+      body.password,
       body.handle,
       body.fullName,
       body.university,
       body.shortBio,
       parseInt(body.batch),
-      verificationHash,
+      file,
     );
     return { message: 'User succesfully registered.' };
   }

@@ -1,7 +1,13 @@
 import Head from "next/head";
 import MainContent from "@components/Home/MainContent";
+import { useEffect } from "react";
+import { store } from "redux/store";
+import { clearError } from "redux/actions/errorActions";
 
 export default function Home() {
+  useEffect(() => {
+    store.dispatch(clearError());
+  }, []);
   return (
     <>
       <Head>

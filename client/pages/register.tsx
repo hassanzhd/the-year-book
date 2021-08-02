@@ -1,8 +1,14 @@
 import Head from "next/head";
 import MainContent from "@components/Register/MainContent";
 import RegisterProvider from "@components/Register/RegisterContext";
+import { useEffect } from "react";
+import { store } from "redux/store";
+import { clearError } from "redux/actions/errorActions";
 
 export default function Register() {
+  useEffect(() => {
+    store.dispatch(clearError());
+  }, []);
   return (
     <>
       <Head>

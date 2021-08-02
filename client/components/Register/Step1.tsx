@@ -1,12 +1,21 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Alert } from "react-bootstrap";
-import { Step1Validator } from "./Step1.validator";
 import { InputField, InputFieldAttributes } from "@components/Form/Field";
 import { registerContext, registerContextI } from "./RegisterContext";
+import { ApplicationState } from "redux/reducers";
+import { connect, InferThunkActionCreatorType } from "react-redux";
+import { registerUserNextStep } from "redux/actions/authActions";
+import Auth from "redux/interfaces/auth";
 
-const Step1 = () => {
-  const [errorMessage, setErrorMessage] = useState<string>("");
+interface componentPropType {
+  errorMessage: string;
+  registerUserNextStep: InferThunkActionCreatorType<Auth.registerUserNextStepType>;
+}
 
+const Step1: React.FC<componentPropType> = ({
+  errorMessage,
+  registerUserNextStep,
+}) => {
   const { stepNumber, email, password } =
     useContext<registerContextI>(registerContext);
 
@@ -31,14 +40,12 @@ const Step1 = () => {
   });
 
   const nextStep = () => {
-    const validator = new Step1Validator();
-    try {
-      if (validator.isValid(email.state, password.state)) {
-        stepNumber.setter(stepNumber.state + 1);
-      }
-    } catch (error) {
-      setErrorMessage(error.message);
-    }
+    registerUserNextStep(
+      email.state,
+      password.state,
+      stepNumber.state,
+      stepNumber.setter
+    );
   };
 
   return (
@@ -58,4 +65,8 @@ const Step1 = () => {
   );
 };
 
-export default Step1;
+const mapStateToProps = (state: ApplicationState) => ({
+  errorMessage: state.error.message,
+});
+
+export default connect(mapStateToProps, { registerUserNextStep })(Step1);
