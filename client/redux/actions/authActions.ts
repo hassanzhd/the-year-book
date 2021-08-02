@@ -22,7 +22,7 @@ export const loginUser: Auth.loginUserType =
         dispatch({
           type: "LOGIN_USER",
         });
-        console.log(data);
+        Router.push("/feed");
       }
     } catch (error) {
       dispatch(getError(error.message));
