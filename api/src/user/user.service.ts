@@ -4,13 +4,11 @@ import { randomBytes } from 'crypto';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
-import { UserHelper } from './user.helper';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private readonly usersRepository: Repository<User>,
-    private readonly userHelper: UserHelper,
   ) {}
 
   async findAll(): Promise<User[]> {
@@ -23,10 +21,7 @@ export class UsersService {
       const user = await this.usersRepository.findOneOrFail({ email: __email });
       return user;
     } catch (error) {
-      const errorMessage = this.userHelper.getErrorMessage(
-        error.constructor.name,
-      );
-      throw new BadGatewayException([errorMessage]);
+      throw new BadGatewayException([error.message]);
     }
   }
 
