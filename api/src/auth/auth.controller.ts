@@ -17,7 +17,8 @@ export class AuthController {
 
   @Get()
   async authorize(@Req() request: Request) {
-    const decodedUser = await this.authService.validateRequest(request);
+    const accessToken = this.authService.getAccessTokenFromHeader(request);
+    const decodedUser = await this.authService.validateAccessToken(accessToken);
     return { user: decodedUser };
   }
 

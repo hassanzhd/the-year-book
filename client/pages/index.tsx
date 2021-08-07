@@ -3,6 +3,8 @@ import MainContent from "@components/Home/MainContent";
 import { useEffect } from "react";
 import { store } from "redux/store";
 import { clearError } from "redux/actions/errorActions";
+import { GetServerSideProps } from "next";
+import { GetServerSidePropsResult } from "API/auth";
 
 export default function Home() {
   useEffect(() => {
@@ -22,3 +24,9 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const handler = new GetServerSidePropsResult(context.req.cookies.accessToken);
+  const result = await handler.forwardAuthentication();
+  return result;
+};

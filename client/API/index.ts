@@ -1,4 +1,18 @@
+export enum HttpHeader {
+  CONTENT_TYPE = "Content-Type",
+  AUTHORIZATION = "Authorization",
+}
+
+type HttpHeaders = Partial<Record<HttpHeader, string>>;
 class API {
+  private headers: HttpHeaders;
+  constructor(__headers: HttpHeaders = {}) {
+    this.headers = {
+      "Content-Type": "application/json",
+      ...__headers,
+    };
+  }
+
   async handleAndConvertResponse(__response: Response) {
     if (!__response.ok) {
       const data = await __response.json();
@@ -10,9 +24,7 @@ class API {
 
   async getRequest(__url: string) {
     const response = await fetch(__url, {
-      headers: {
-        "Content-type": "application/json",
-      },
+      headers: this.headers,
       credentials: "include",
     });
     const data = await this.handleAndConvertResponse(response);

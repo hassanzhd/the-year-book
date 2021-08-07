@@ -18,14 +18,18 @@ export class AuthService {
     return passwordVerified;
   }
 
-  async validateRequest(request: Request) {
-    const { accessToken } = request.cookies;
+  async validateAccessToken(accessToken: string) {
     try {
       const decodedUser = await this.jwtService.verify(accessToken);
       return decodedUser;
     } catch (err) {
       return false;
     }
+  }
+
+  getAccessTokenFromHeader(__request: Request) {
+    const authorizationHeader = __request.headers['authorization'];
+    return authorizationHeader;
   }
 
   async login(__requestBody: LoginDto) {
