@@ -1,6 +1,6 @@
 describe("Register form testing", () => {
   it("should be able to successfully move from step 1 to step2", () => {
-    cy.visit("http://localhost:3000/register");
+    cy.visit("http://localhost/register");
 
     cy.get("input#email")
       .type("foobar@email")
@@ -14,7 +14,7 @@ describe("Register form testing", () => {
   });
 
   it("should be able to successfully move from step 1 to step2 to vice versa", () => {
-    cy.visit("http://localhost:3000/register");
+    cy.visit("http://localhost/register");
 
     cy.get("input#email")
       .type("foobar@email")
@@ -29,7 +29,7 @@ describe("Register form testing", () => {
   });
 
   it("should be able to successfully submit form (e2e)", () => {
-    cy.visit("http://localhost:3000/register");
+    cy.visit("http://localhost/register");
 
     cy.get("input#email")
       .type("foobar@email.com")
