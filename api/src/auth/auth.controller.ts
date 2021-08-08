@@ -17,7 +17,7 @@ export class AuthController {
 
   @Get()
   async authorize(@Req() request: Request) {
-    const accessToken = this.authService.getAccessTokenFromHeader(request);
+    const { accessToken } = request.cookies;
     const decodedUser = await this.authService.validateAccessToken(accessToken);
     return { user: decodedUser };
   }

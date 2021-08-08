@@ -1,4 +1,3 @@
-import { Dispatch } from "react";
 import {
   UserMainValidator,
   UserOtherValidator,
@@ -87,3 +86,21 @@ export const registerUserSecondStep: Auth.registerUserSecondStepType =
       dispatch(getError(error.message));
     }
   };
+
+export const loadUser: Auth.loadUser = () => async (dispatch) => {
+  const api = new API();
+
+  try {
+    const { user } = await api.getRequest("http://localhost/api/auth");
+    console.log(user);
+    if (user) {
+      dispatch({
+        type: "USER_LOADED",
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: "USER_LOAD_ERROR",
+    });
+  }
+};

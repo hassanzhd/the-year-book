@@ -1,22 +1,34 @@
 import Head from "next/head";
 import MainContent from "@components/Feed/MainContent";
-import { GetServerSideProps } from "next";
-import { GetServerSidePropsResult } from "API/auth";
+import { connect } from "react-redux";
+import { ApplicationState } from "redux/reducers";
+import Router from "next/router";
+import { useEffect } from "react";
 
-export default function Feed() {
+interface pageProps {
+  isAuthenticated: boolean;
+  isLoading: boolean;
+}
+
+const Feed: React.FC<pageProps> = ({ isAuthenticated, isLoading }) => {
+  useEffect(() => {
+    !isAuthenticated && Router.push("/");
+  }, []);
+
   return (
     <>
       <Head>
         <title>Feed | The Year Book</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainContent />
+      {!isLoading && <MainContent />}
     </>
   );
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const handler = new GetServerSidePropsResult(context.req.cookies.accessToken);
-  const result = await handler.ensureAuthenticated();
-  return result;
 };
+
+const mapStateToProps = (state: ApplicationState) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  isLoading: state.auth.isLoading,
+});
+
+export default connect(mapStateToProps, {})(Feed);
