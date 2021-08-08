@@ -1,5 +1,6 @@
 import Head from "next/head";
 import MainContent from "@components/Settings/MainContent";
+import Auth, { ensureAuthenticated } from "@components/Auth";
 
 export default function Settings() {
   return (
@@ -12,7 +13,9 @@ export default function Settings() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainContent />
+      <Auth redirectHandler={ensureAuthenticated} redirectUrl="/">
+        <MainContent />
+      </Auth>
     </>
   );
 }

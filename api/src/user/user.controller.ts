@@ -20,7 +20,6 @@ export class UserController {
   @Get()
   @UseGuards(AuthGuard)
   async findAll(@RequestDecodedUser() user: GetUserDto) {
-    console.log(user);
     const users = await this.userService.findAll();
     const transformmedDtoUsers = GetUserDto.fromUserEntities(users);
     return transformmedDtoUsers;

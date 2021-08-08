@@ -1,8 +1,15 @@
-import { LOGIN_USER, REGISTER_SUCCESSFUL } from "redux/actions/types";
+import {
+  LOGIN_USER,
+  REGISTER_SUCCESSFUL,
+  USER_LOADED,
+  USER_LOAD_ERROR,
+} from "redux/actions/types";
 import Auth from "redux/interfaces/auth";
 
 const initialState = {
   successMessage: "",
+  isAuthenticated: false,
+  isLoading: true,
 };
 
 function authReducer(
@@ -15,8 +22,22 @@ function authReducer(
         ...state,
         successMessage: action.payload.successMessage,
       };
-
+    case USER_LOADED:
+      return {
+        ...state,
+        isAuthenticated: true,
+        isLoading: false,
+      };
+    case USER_LOAD_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+      };
     case LOGIN_USER:
+      return {
+        ...state,
+        isAuthenticated: true,
+      };
     default:
       return state;
   }

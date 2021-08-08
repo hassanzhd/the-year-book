@@ -1,14 +1,19 @@
 import Head from "next/head";
 import MainContent from "@components/Feed/MainContent";
+import Auth, { ensureAuthenticated } from "components/Auth";
 
-export default function Feed() {
+const Feed = () => {
   return (
     <>
       <Head>
         <title>Feed | The Year Book</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainContent />
+      <Auth redirectUrl="/" redirectHandler={ensureAuthenticated}>
+        <MainContent />
+      </Auth>
     </>
   );
-}
+};
+
+export default Feed;

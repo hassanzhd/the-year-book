@@ -4,6 +4,8 @@ import Error from "./error";
 namespace Auth {
   export interface state {
     successMessage: string;
+    isAuthenticated: boolean;
+    isLoading: boolean;
   }
 
   interface UserMain {
@@ -71,6 +73,20 @@ namespace Auth {
   export type registerUserSecondStepType = (
     __user: User
   ) => (dispatch: Dispatch<registerUserDispatchTypes>) => Promise<void>;
+
+  interface loadUserAction {
+    type: "USER_LOADED";
+  }
+
+  interface userLoadErrorAction {
+    type: "USER_LOAD_ERROR";
+  }
+
+  type userLoadDispatchTypes = loadUserAction | userLoadErrorAction;
+
+  export type loadUser = () => (
+    dispatch: Dispatch<userLoadDispatchTypes>
+  ) => Promise<void>;
 }
 
 export default Auth;
