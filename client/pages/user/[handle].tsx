@@ -1,5 +1,6 @@
 import Head from "next/head";
 import MainContent from "@components/User/MainContent";
+import Auth, { ensureAuthenticated } from "@components/Auth";
 
 export default function Handle({ handle }: { handle: string }) {
   return (
@@ -8,7 +9,9 @@ export default function Handle({ handle }: { handle: string }) {
         <title> {handle} | The Year Book</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainContent />
+      <Auth redirectUrl="/" redirectHandler={ensureAuthenticated}>
+        <MainContent />
+      </Auth>
     </>
   );
 }

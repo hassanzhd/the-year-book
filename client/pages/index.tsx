@@ -3,6 +3,7 @@ import MainContent from "@components/Home/MainContent";
 import { useEffect } from "react";
 import { store } from "redux/store";
 import { clearError } from "redux/actions/errorActions";
+import Auth, { forwardAuthenticated } from "components/Auth";
 
 export default function Home() {
   useEffect(() => {
@@ -18,7 +19,9 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainContent />
+      <Auth redirectUrl="/feed" redirectHandler={forwardAuthenticated}>
+        <MainContent />
+      </Auth>
     </>
   );
 }

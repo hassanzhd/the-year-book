@@ -23,7 +23,7 @@ export class AuthService {
       const decodedUser = await this.jwtService.verify(accessToken);
       return decodedUser;
     } catch (err) {
-      return false;
+      throw new UnauthorizedException();
     }
   }
 

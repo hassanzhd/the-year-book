@@ -25,10 +25,19 @@ function authReducer(
     case USER_LOADED:
       return {
         ...state,
-        isAuthenticated: false,
+        isAuthenticated: true,
+        isLoading: false,
+      };
+    case USER_LOAD_ERROR:
+      return {
+        ...state,
+        isLoading: false,
       };
     case LOGIN_USER:
-    case USER_LOAD_ERROR:
+      return {
+        ...state,
+        isAuthenticated: true,
+      };
     default:
       return state;
   }

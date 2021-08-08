@@ -92,9 +92,8 @@ export const loadUser: Auth.loadUser = () => async (dispatch) => {
 
   try {
     const { user } = await api.getRequest("http://localhost/api/auth");
-    console.log(user);
     if (user) {
-      dispatch({
+      return dispatch({
         type: "USER_LOADED",
       });
     }

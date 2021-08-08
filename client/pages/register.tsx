@@ -4,6 +4,7 @@ import RegisterProvider from "@components/Register/RegisterContext";
 import { useEffect } from "react";
 import { store } from "redux/store";
 import { clearError } from "redux/actions/errorActions";
+import Auth, { forwardAuthenticated } from "@components/Auth";
 
 export default function Register() {
   useEffect(() => {
@@ -19,9 +20,11 @@ export default function Register() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <RegisterProvider>
-        <MainContent />
-      </RegisterProvider>
+      <Auth redirectHandler={forwardAuthenticated} redirectUrl="/feed">
+        <RegisterProvider>
+          <MainContent />
+        </RegisterProvider>
+      </Auth>
     </>
   );
 }
