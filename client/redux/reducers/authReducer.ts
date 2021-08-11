@@ -3,6 +3,7 @@ import {
   REGISTER_SUCCESSFUL,
   USER_LOADED,
   USER_LOAD_ERROR,
+  LOGOUT_USER,
 } from "redux/actions/types";
 import Auth from "redux/interfaces/auth";
 
@@ -37,6 +38,11 @@ function authReducer(
       return {
         ...state,
         isAuthenticated: true,
+      };
+    case LOGOUT_USER:
+      return {
+        ...state,
+        isAuthenticated: false,
       };
     default:
       return state;

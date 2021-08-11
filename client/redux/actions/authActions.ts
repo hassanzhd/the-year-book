@@ -103,3 +103,19 @@ export const loadUser: Auth.loadUser = () => async (dispatch) => {
     });
   }
 };
+
+export const logoutUser: Auth.logoutUser = () => async (dispatch) => {
+  const api = new API();
+
+  try {
+    await api.postRequest("http://localhost/api/auth/logout");
+
+    dispatch({
+      type: "LOGOUT_USER",
+    });
+
+    Router.push("/");
+  } catch (error) {
+    alert("Could not process request");
+  }
+};
