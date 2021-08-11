@@ -45,7 +45,16 @@ const Auth: React.FC<pageProps> = ({
   redirectUrl,
   redirectHandler,
 }) => {
-  if (redirectHandler(isLoading, isAuthenticated, redirectUrl)) {
+  const [shouldRenderChildren, setShouldRenderChildren] =
+    useState<boolean>(false);
+
+  useEffect(() => {
+    setShouldRenderChildren(
+      redirectHandler(isLoading, isAuthenticated, redirectUrl)
+    );
+  }, [isLoading, isAuthenticated]);
+
+  if (shouldRenderChildren) {
     return <>{children}</>;
   }
   return <CenterSpinner />;
