@@ -1,15 +1,14 @@
 import MainContentStyling from "./MainContent.module.scss";
 import Image from "next/image";
 import NavBar from "@components/NavBar";
+import SettingsButton from "@components/SettingButton";
 import { getStyleString } from "@helpers/utility";
 
 const MainContent = () => {
   return (
     <>
       <NavBar />
-      <div className="others flex">
-        <button className="button">&#9776;</button>
-      </div>
+      <SettingsButton />
       <main className={getStyleString(MainContentStyling.profileData, "flex")}>
         <Image
           src="/user.png"

@@ -2,6 +2,7 @@ import MainContentStyling from "./MainContent.module.scss";
 import NavBar from "@components/NavBar";
 import { getStyleString } from "@helpers/utility";
 import SettingEntry from "./SettingEntry";
+import SettingsButton from "@components/SettingButton";
 
 const MainContent = () => {
   const settingAttributes: Array<string> = [
@@ -14,9 +15,7 @@ const MainContent = () => {
   return (
     <>
       <NavBar />
-      <div className="others flex">
-        <button className="button">&#9776;</button>
-      </div>
+      <SettingsButton />
       <div className="flex">
         <h1>Settings</h1>
       </div>

@@ -1,0 +1,18 @@
+.button {
+  padding: 15px 25px;
+  border-radius: 8px;
+}
+
+@media (min-width: 1024px) {
+  .others {
+    justify-content: flex-end;
+    padding-right: 50px;
+  }
+
+  .others {
+    .button {
+      padding: 15px 25px;
+      border-radius: 10px;
+    }
+  }
+}
