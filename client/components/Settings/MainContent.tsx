@@ -12,10 +12,6 @@ interface componentPropType {
   logoutUser: InferThunkActionCreatorType<Auth.logoutUser>;
 }
 
-const handleLogoutOnClick = () => {
-  logoutUser();
-};
-
 const MainContent: React.FC<componentPropType> = ({ logoutUser }) => {
   const settingAttributes: Array<string> = [
     "Handle",
@@ -42,10 +38,7 @@ const MainContent: React.FC<componentPropType> = ({ logoutUser }) => {
           <button className={MainContentStyling.button}>
             Delete your account
           </button>
-          <button
-            onClick={handleLogoutOnClick}
-            className={MainContentStyling.button}
-          >
+          <button onClick={logoutUser} className={MainContentStyling.button}>
             Logout
           </button>
         </div>
