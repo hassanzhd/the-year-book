@@ -31,7 +31,7 @@ class API {
     return data;
   }
 
-  async postRequest(__url: string, __body: any) {
+  async postRequest(__url: string, __body: any = {}) {
     const response = await fetch(__url, {
       method: "POST",
       headers: {

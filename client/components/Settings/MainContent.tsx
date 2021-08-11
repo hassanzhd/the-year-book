@@ -2,8 +2,17 @@ import MainContentStyling from "./MainContent.module.scss";
 import NavBar from "@components/NavBar";
 import { getStyleString } from "@helpers/utility";
 import SettingEntry from "./SettingEntry";
+import SettingsButton from "@components/SettingButton";
+import { connect, InferThunkActionCreatorType } from "react-redux";
+import { ApplicationState } from "redux/reducers";
+import { logoutUser } from "redux/actions/authActions";
+import Auth from "redux/interfaces/auth";
 
-const MainContent = () => {
+interface componentPropType {
+  logoutUser: InferThunkActionCreatorType<Auth.logoutUser>;
+}
+
+const MainContent: React.FC<componentPropType> = ({ logoutUser }) => {
   const settingAttributes: Array<string> = [
     "Handle",
     "Full Name",
@@ -14,9 +23,7 @@ const MainContent = () => {
   return (
     <>
       <NavBar />
-      <div className="others flex">
-        <button className="button">&#9776;</button>
-      </div>
+      <SettingsButton />
       <div className="flex">
         <h1>Settings</h1>
       </div>
@@ -28,15 +35,18 @@ const MainContent = () => {
           <button className={MainContentStyling.button}>
             Change your password
           </button>
-
           <button className={MainContentStyling.button}>
             Delete your account
           </button>
-          <button className={MainContentStyling.button}>Logout</button>
+          <button onClick={logoutUser} className={MainContentStyling.button}>
+            Logout
+          </button>
         </div>
       </div>
     </>
   );
 };
 
-export default MainContent;
+const mapStateToProps = (state: ApplicationState) => ({});
+
+export default connect(mapStateToProps, { logoutUser })(MainContent);

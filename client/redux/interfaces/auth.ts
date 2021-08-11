@@ -87,6 +87,14 @@ namespace Auth {
   export type loadUser = () => (
     dispatch: Dispatch<userLoadDispatchTypes>
   ) => Promise<void>;
+
+  interface logoutUserAction {
+    type: "LOGOUT_USER";
+  }
+
+  export type logoutUser = () => (
+    dispatch: Dispatch<logoutUserAction>
+  ) => Promise<void>;
 }
 
 export default Auth;

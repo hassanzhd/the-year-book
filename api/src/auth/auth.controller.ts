@@ -33,4 +33,12 @@ export class AuthController {
       .status(HttpStatus.OK)
       .json({ message: 'User successfully logged in' });
   }
+
+  @Post('logout')
+  logout(@Res() response: Response) {
+    response.clearCookie('accessToken');
+    response
+      .status(HttpStatus.OK)
+      .json({ message: 'User successfully logged out' });
+  }
 }
